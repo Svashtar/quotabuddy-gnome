@@ -4,8 +4,10 @@
 
 QuotaBuddy has no reading of your limits yet.
 
+With direct mode, the first check runs within a few seconds; if it stays empty, see the direct-mode sections below. With the status line:
+
 1. Check **Settings → Data → Status-Line Bridge** says *Installed*.
-2. Send a message in Claude Code and wait for the reply. Claude Code only reports limits after the first reply of a session.
+2. Send a message in Claude Code in a terminal and wait for the reply. Claude Code only reports limits after the first reply of a session.
 3. Limits are only reported for Claude Pro and Max plans signed in to Claude Code, not for API keys.
 4. If *Last Reading* still says *None yet*, check that Claude Code shows a status line at all. If you start Claude Code with a different `CLAUDE_CONFIG_DIR`, set the same folder in **Settings → Data → Claude Code Folder** and install the bridge again.
 

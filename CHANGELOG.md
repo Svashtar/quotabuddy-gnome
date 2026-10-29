@@ -13,7 +13,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - Plan badge (Pro, Max 5×, Max 20×…) read from Claude Code's sign-in, or set by hand.
 - Status-line bridge installed from the settings with one click, showing exactly what changes; a status line you already had keeps showing.
 - Own usage history built from Claude Code's logs (in a separate process), kept beyond Claude Code's 30-day log cleanup.
-- Optional direct mode for account-wide figures, off by default and explained before it turns on.
+- Direct mode for current, account-wide figures, recommended in the settings; off until you turn it on and accept what it means.
 - About page with release notes, debug info for bug reports and settings backup.
 - Right-click the top-bar button for quick actions: refresh now, show what is left or used, set up usage limits, open usage on claude.ai, settings. The Menu key or Shift+F10 opens it from the keyboard.
 - Until there are usage limits to show, the top bar shows the QuotaBuddy icon rather than empty rings.
+- Without direct mode, the dropdown says when the figures are out of date and why.
+- The dropdown scrolls when it is taller than the screen.

@@ -30,6 +30,13 @@ const TICK_S = 30;
 const label = (text, style_class = '', params = {}) => new St.Label({text, style_class, ...params});
 const vbox = (style_class = '', params = {}) => new St.BoxLayout({orientation: Clutter.Orientation.VERTICAL, style_class, ...params});
 const hbox = (style_class = '', params = {}) => new St.BoxLayout({style_class, ...params});
+// Wrapping instead of ending in "…": the scrolled dropdown gives labels their
+// minimum height, which for an ellipsizing label is a single line.
+function wrap(l) {
+    l.clutter_text.line_wrap = true;
+    l.clutter_text.ellipsize = Pango.EllipsizeMode.NONE;
+    return l;
+}
 const spacer = () => new St.Widget({x_expand: true});
 
 function colorCss(family) {
@@ -56,7 +63,18 @@ export class Popup {
 
         this._item = new PopupMenu.PopupBaseMenuItem({reactive: false, can_focus: false, style_class: 'quotabuddy-item'});
         this._content = vbox('quotabuddy-content', {x_expand: true});
-        this._item.add_child(this._content);
+        // Scrolls when the dropdown is taller than the screen (the indicator
+        // caps the menu at the work area's height).
+        const scroll = new St.ScrollView({
+            style_class: 'quotabuddy-scroll',
+            hscrollbar_policy: St.PolicyType.NEVER,
+            vscrollbar_policy: St.PolicyType.AUTOMATIC,
+            overlay_scrollbars: true,
+            x_expand: true,
+            y_expand: true,
+        });
+        scroll.set_child(this._content);
+        this._item.add_child(scroll);
         menu.addMenuItem(this._item);
 
         menu.connectObject('open-state-changed', (_m, open) => {
@@ -103,10 +121,14 @@ export class Popup {
         }
 
         const main = windows.filter(w => w.kind !== 'model-week');
-        if (main.length)
+        if (main.length) {
             this._content.add_child(this._hero(main, now));
-        else
+            const note = this._staleNote(main, now);
+            if (note)
+                this._content.add_child(note);
+        } else {
             this._content.add_child(this._noLimits());
+        }
 
         const models = windows.filter(w => w.kind === 'model-week');
         const spend = this._provider.spend;
@@ -151,20 +173,40 @@ export class Popup {
     _empty() {
         const box = vbox('quotabuddy-empty');
         box.add_child(label(_('No usage data yet'), 'quotabuddy-empty-title'));
-        const text = label(_('Install the status-line bridge in the settings, then send a message in Claude Code. Its figures show up here.'),
+        const text = label(_('Turn on direct mode in the settings for your limits, or install the status-line bridge to use no network.'),
                            'quotabuddy-dim');
-        text.clutter_text.line_wrap = true;
+        wrap(text);
         box.add_child(text);
         return box;
+    }
+
+    // Status-line readings only arrive with replies in a terminal, so they can
+    // be hours old and miss the session; say so instead of looking current.
+    _staleNote(windows, now) {
+        if (this._provider.status.directMode)
+            return null;
+        const newest = Math.max(...windows.map(w => w.updatedAt));
+        if (now - newest <= STALE_MS)
+            return null;
+        /* Translators: %s is a duration like "2h 10m" */
+        const text = label(_('These figures are from %s ago, the last reply in Claude Code in a terminal. Turn on direct mode for current ones.')
+            .format(formatDuration(now - newest)), 'quotabuddy-dim quotabuddy-small');
+        wrap(text);
+        return text;
     }
 
     _noLimits() {
         const box = vbox('quotabuddy-section');
         const status = this._provider.status;
-        const text = label(status.bridgeInstalled
-            ? _('Limits appear after the next reply in Claude Code.')
-            : _('Install the status-line bridge in the settings to see your limits.'), 'quotabuddy-dim');
-        text.clutter_text.line_wrap = true;
+        let message;
+        if (status.directMode)
+            message = _('Limits appear after the next check with Anthropic.');
+        else if (status.bridgeInstalled)
+            message = _('Limits appear after the next reply in Claude Code in a terminal. Direct mode shows them straight away.');
+        else
+            message = _('Turn on direct mode in the settings to see your limits.');
+        const text = label(message, 'quotabuddy-dim');
+        wrap(text);
         box.add_child(text);
         return box;
     }
@@ -202,7 +244,7 @@ export class Popup {
                 reset = _('Reset time unknown');
             // Half the dropdown is too narrow for "Resets in 10h 33m · 02:00 AM".
             const resetLabel = label(reset, 'quotabuddy-dim quotabuddy-small', {x_align: Clutter.ActorAlign.CENTER});
-            resetLabel.clutter_text.line_wrap = true;
+            wrap(resetLabel);
             resetLabel.clutter_text.line_alignment = Pango.Alignment.CENTER;
             card.add_child(resetLabel);
             box.add_child(card);
@@ -275,7 +317,7 @@ export class Popup {
             const row = hbox('quotabuddy-pace-row');
             row.add_child(new St.Widget({style_class: `quotabuddy-dot quotabuddy-dot-${level}`, y_align: Clutter.ActorAlign.CENTER}));
             const t = label(`${windowName(w)}: ${text}`, 'quotabuddy-pace-text', {x_expand: true});
-            t.clutter_text.line_wrap = true;
+            wrap(t);
             row.add_child(t);
             box.add_child(row);
         }
@@ -377,7 +419,7 @@ export class Popup {
         else
             note = _('An estimate for comparison; your plan is not billed per token.');
         const t = label(`${note} ${_('Prices as of %s.').format(PRICES_AS_OF)}`, 'quotabuddy-dim quotabuddy-small');
-        t.clutter_text.line_wrap = true;
+        wrap(t);
         box.add_child(t);
         return box;
     }
@@ -398,7 +440,7 @@ export class Popup {
             const text = _('Busiest session today: %s · %s · %s · %s').format(projectName(busiest.project),
                                                                               formatDuration(busiest.end - busiest.start), models[0], formatMoney(busiest.cost));
             const t = label(text, 'quotabuddy-small quotabuddy-line');
-            t.clutter_text.line_wrap = true;
+            wrap(t);
             box.add_child(t);
         }
         const ratio = cacheHitRatio(week.total);

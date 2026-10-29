@@ -96,16 +96,27 @@ class QuotaBuddyIndicator extends PanelMenu.Button {
     _addMenu() {
         const menu = new PopupMenu.PopupMenu(this, 0.5, St.Side.TOP);
         menu.actor.add_style_class_name('panel-menu');
-        menu.connect('open-state-changed', () => {
+        menu.connect('open-state-changed', (_m, open) => {
             if (this._main.isOpen || this._quick?.isOpen)
                 this.add_style_pseudo_class('active');
             else
                 this.remove_style_pseudo_class('active');
+            if (open)
+                this._fitToScreen(menu);
         });
         Main.uiGroup.add_child(menu.actor);
         menu.actor.hide();
         Main.panel.menuManager.addMenu(menu);
         return menu;
+    }
+
+    // As PanelMenu.Button does for its own menu: never taller than the work
+    // area (in logical pixels, as CSS is).
+    _fitToScreen(menu) {
+        const workArea = Main.layoutManager.getWorkAreaForMonitor(Main.layoutManager.primaryIndex);
+        const scale = St.ThemeContext.get_for_stage(global.stage).scale_factor;
+        const margins = menu.actor.margin_top + menu.actor.margin_bottom;
+        menu.actor.style = `max-height: ${Math.round((workArea.height - margins) / scale)}px;`;
     }
 
     _toggle(menu) {

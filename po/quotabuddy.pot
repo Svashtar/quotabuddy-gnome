@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QuotaBuddy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-29 13:23+0100\n"
+"POT-Creation-Date: 2026-10-29 15:37+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,231 +17,264 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/ui/indicator.js:109
+#: src/ui/indicator.js:131
+msgid "Refresh Now"
+msgstr ""
+
+#: src/ui/indicator.js:132 src/prefs/displayPage.js:84
+msgid "Show What Is Left"
+msgstr ""
+
+#: src/ui/indicator.js:136
+msgid "Set Up Usage Limits…"
+msgstr ""
+
+#: src/ui/indicator.js:137
+msgid "Open Usage on claude.ai"
+msgstr ""
+
+#: src/ui/indicator.js:145 src/ui/popup.js:479 src/prefs/aboutPage.js:127
+msgid "Settings"
+msgstr ""
+
+#: src/ui/indicator.js:169
+msgid "QuotaBuddy: no usage limits yet"
+msgstr ""
+
+#: src/ui/indicator.js:220
 #, javascript-format
 msgid "%s: %d%% left"
 msgstr ""
 
-#: src/ui/indicator.js:109
+#: src/ui/indicator.js:220
 #, javascript-format
 msgid "%s: %d%% used"
 msgstr ""
 
-#: src/ui/indicator.js:116
+#: src/ui/indicator.js:227
 msgid "S"
 msgstr ""
 
-#: src/ui/indicator.js:116 src/ui/popup.js:41 src/prefs/displayPage.js:71
+#: src/ui/indicator.js:227 src/ui/popup.js:49 src/prefs/displayPage.js:71
 msgid "Session"
 msgstr ""
 
-#: src/ui/indicator.js:121
+#: src/ui/indicator.js:232
 msgid "W"
 msgstr ""
 
-#: src/ui/indicator.js:121 src/ui/popup.js:43 src/prefs/displayPage.js:72
+#: src/ui/indicator.js:232 src/ui/popup.js:51 src/prefs/displayPage.js:72
 msgid "Week"
 msgstr ""
 
-#: src/ui/indicator.js:125
+#: src/ui/indicator.js:236
 msgid "Model"
 msgstr ""
 
-#: src/ui/indicator.js:132
+#: src/ui/indicator.js:243
 #, javascript-format
 msgid "Session resets in %s"
 msgstr ""
 
-#: src/ui/indicator.js:136
+#: src/ui/indicator.js:247
 #, javascript-format
 msgid "%s tokens today"
 msgstr ""
 
-#: src/ui/indicator.js:140
+#: src/ui/indicator.js:251
 #, javascript-format
 msgid "%s at API prices today"
 msgstr ""
 
-#: src/ui/popup.js:45
+#: src/ui/popup.js:53
 #, javascript-format
 msgid "%s week"
 msgstr ""
 
-#: src/ui/popup.js:139
+#: src/ui/popup.js:162
 msgid "direct"
 msgstr ""
 
-#: src/ui/popup.js:139
+#: src/ui/popup.js:162
 msgid "status line"
 msgstr ""
 
-#: src/ui/popup.js:142
+#: src/ui/popup.js:165
 #, javascript-format
 msgid "Just updated · %s"
 msgstr ""
 
-#: src/ui/popup.js:144
+#: src/ui/popup.js:167
 #, javascript-format
 msgid "%s ago · %s"
 msgstr ""
 
-#: src/ui/popup.js:152
+#: src/ui/popup.js:175
 msgid "No usage data yet"
 msgstr ""
 
-#: src/ui/popup.js:153
+#: src/ui/popup.js:176
 msgid ""
-"Install the status-line bridge in the settings, then send a message in "
-"Claude Code. Its figures show up here."
+"Turn on direct mode in the settings for your limits, or install the status-"
+"line bridge to use no network."
 msgstr ""
 
-#: src/ui/popup.js:164
-msgid "Limits appear after the next reply in Claude Code."
+#: src/ui/popup.js:192
+#, javascript-format
+msgid ""
+"These figures are from %s ago, the last reply in Claude Code in a terminal. "
+"Turn on direct mode for current ones."
 msgstr ""
 
-#: src/ui/popup.js:165
-msgid "Install the status-line bridge in the settings to see your limits."
+#: src/ui/popup.js:203
+msgid "Limits appear after the next check with Anthropic."
 msgstr ""
 
-#: src/ui/popup.js:189
+#: src/ui/popup.js:205
+msgid ""
+"Limits appear after the next reply in Claude Code in a terminal. Direct mode "
+"shows them straight away."
+msgstr ""
+
+#: src/ui/popup.js:207
+msgid "Turn on direct mode in the settings to see your limits."
+msgstr ""
+
+#: src/ui/popup.js:232
 msgid "left"
 msgstr ""
 
-#: src/ui/popup.js:189
+#: src/ui/popup.js:232
 msgid "used"
 msgstr ""
 
-#: src/ui/popup.js:196
+#: src/ui/popup.js:239
 msgid "Reset, waiting for a reading"
 msgstr ""
 
-#: src/ui/popup.js:199
+#: src/ui/popup.js:242
 #, javascript-format
 msgid "Resets in %s · %s"
 msgstr ""
 
-#: src/ui/popup.js:201
+#: src/ui/popup.js:244
 msgid "Reset time unknown"
 msgstr ""
 
-#: src/ui/popup.js:214
+#: src/ui/popup.js:261
 #, javascript-format
 msgid "resets %s"
 msgstr ""
 
-#: src/ui/popup.js:217
+#: src/ui/popup.js:264
 msgid "Extra usage"
 msgstr ""
 
-#: src/ui/popup.js:240 src/prefs/displayPage.js:96
+#: src/ui/popup.js:287 src/prefs/displayPage.js:96
 msgid "Pace"
 msgstr ""
 
-#: src/ui/popup.js:250
+#: src/ui/popup.js:297
 msgid "Limit reached"
 msgstr ""
 
-#: src/ui/popup.js:252
+#: src/ui/popup.js:299
 #, javascript-format
 msgid "At this pace the limit is reached in %s, %s before it resets"
 msgstr ""
 
-#: src/ui/popup.js:258
+#: src/ui/popup.js:305
 #, javascript-format
 msgid "Faster than an even pace: %d%% used, %d%% of the time gone"
 msgstr ""
 
-#: src/ui/popup.js:262
+#: src/ui/popup.js:309
 #, javascript-format
 msgid "On track to end near %d%%"
 msgstr ""
 
-#: src/ui/popup.js:265
+#: src/ui/popup.js:312
 msgid "No use lately"
 msgstr ""
 
-#: src/ui/popup.js:268
+#: src/ui/popup.js:315
 msgid "Not enough readings yet"
 msgstr ""
 
-#: src/ui/popup.js:283 src/prefs/displayPage.js:97
+#: src/ui/popup.js:330 src/prefs/displayPage.js:97
 msgid "Activity"
 msgstr ""
 
-#: src/ui/popup.js:308
+#: src/ui/popup.js:355
 msgid "24 h ago"
 msgstr ""
 
-#: src/ui/popup.js:310
+#: src/ui/popup.js:357
 msgid "12 h"
 msgstr ""
 
-#: src/ui/popup.js:312
+#: src/ui/popup.js:359
 msgid "now"
 msgstr ""
 
-#: src/ui/popup.js:321
+#: src/ui/popup.js:368
 msgid "Other"
 msgstr ""
 
-#: src/ui/popup.js:326
+#: src/ui/popup.js:373
 msgid "No replies in this range"
 msgstr ""
 
-#: src/ui/popup.js:333
+#: src/ui/popup.js:380
 msgid "24 h"
 msgstr ""
 
-#: src/ui/popup.js:333 src/ui/popup.js:352
+#: src/ui/popup.js:380 src/ui/popup.js:399
 msgid "7 days"
 msgstr ""
 
-#: src/ui/popup.js:347 src/prefs/displayPage.js:76
+#: src/ui/popup.js:394 src/prefs/displayPage.js:76
 msgid "At API prices"
 msgstr ""
 
-#: src/ui/popup.js:351
+#: src/ui/popup.js:398
 msgid "Today"
 msgstr ""
 
-#: src/ui/popup.js:353
+#: src/ui/popup.js:400
 msgid "This month"
 msgstr ""
 
-#: src/ui/popup.js:371
+#: src/ui/popup.js:418
 #, javascript-format
 msgid "This month’s use is worth %s× the %s price"
 msgstr ""
 
-#: src/ui/popup.js:373
+#: src/ui/popup.js:420
 msgid "An estimate for comparison; your plan is not billed per token."
 msgstr ""
 
-#: src/ui/popup.js:374
+#: src/ui/popup.js:421
 #, javascript-format
 msgid "Prices as of %s."
 msgstr ""
 
-#: src/ui/popup.js:382
+#: src/ui/popup.js:429
 msgid "Projects this week"
 msgstr ""
 
-#: src/ui/popup.js:393
+#: src/ui/popup.js:440
 #, javascript-format
 msgid "Busiest session today: %s · %s · %s · %s"
 msgstr ""
 
-#: src/ui/popup.js:402
+#: src/ui/popup.js:449
 #, javascript-format
 msgid "Cache: %d%% of prompts read from cache"
 msgstr ""
 
-#: src/ui/popup.js:431
+#: src/ui/popup.js:478
 msgid "Refresh"
-msgstr ""
-
-#: src/ui/popup.js:432 src/prefs/aboutPage.js:127
-msgid "Settings"
 msgstr ""
 
 #: src/prefs/aboutPage.js:36
@@ -395,8 +428,8 @@ msgid ""
 "history is kept."
 msgstr ""
 
-#: src/prefs/aboutPage.js:262 src/prefs/dataPage.js:193
-#: src/prefs/dataPage.js:235
+#: src/prefs/aboutPage.js:262 src/prefs/dataPage.js:198
+#: src/prefs/dataPage.js:240
 msgid "Cancel"
 msgstr ""
 
@@ -483,10 +516,6 @@ msgid "Style"
 msgstr ""
 
 #: src/prefs/displayPage.js:84
-msgid "Show What Is Left"
-msgstr ""
-
-#: src/prefs/displayPage.js:84
 msgid "Otherwise show what is used"
 msgstr ""
 
@@ -547,172 +576,179 @@ msgid "Data"
 msgstr ""
 
 #: src/prefs/dataPage.js:45
-msgid "Claude Code Status Line"
+msgid "Direct Mode (Recommended)"
 msgstr ""
 
 #: src/prefs/dataPage.js:46
 msgid ""
-"Claude Code passes your session and weekly limits to its status line after "
-"each reply. QuotaBuddy adds a small bridge there to receive them. A status "
-"line you already have keeps showing."
+"The most complete figures: asks Anthropic every few minutes for your whole "
+"account, including the desktop app, other devices and model limits such as "
+"Fable. It uses an undocumented service with Claude Code’s sign-in, so it is "
+"off until you turn it on and read what that means."
 msgstr ""
 
-#: src/prefs/dataPage.js:49
-msgid "Status-Line Bridge"
+#: src/prefs/dataPage.js:50
+msgid "Direct Mode"
 msgstr ""
 
-#: src/prefs/dataPage.js:54
-msgid "Last Reading"
+#: src/prefs/dataPage.js:50
+msgid "Read-only; the sign-in is never changed or renewed"
+msgstr ""
+
+#: src/prefs/dataPage.js:59
+msgid "Check Every"
 msgstr ""
 
 #: src/prefs/dataPage.js:60
+msgid "Minutes between requests. Anthropic limits how often this may be asked."
+msgstr ""
+
+#: src/prefs/dataPage.js:68
+msgid "What Direct Mode Does"
+msgstr ""
+
+#: src/prefs/dataPage.js:75
+msgid "Claude Code Status Line"
+msgstr ""
+
+#: src/prefs/dataPage.js:76
+msgid ""
+"Works without any network use, but less complete: Claude Code only passes "
+"the session and weekly limits to its status line after replies in a terminal "
+"(not the desktop app), and leaves the session out after it resets. "
+"QuotaBuddy adds a small bridge there to receive them. A status line you "
+"already have keeps showing."
+msgstr ""
+
+#: src/prefs/dataPage.js:80
+msgid "Status-Line Bridge"
+msgstr ""
+
+#: src/prefs/dataPage.js:85
+msgid "Last Reading"
+msgstr ""
+
+#: src/prefs/dataPage.js:91
 msgid "Account"
 msgstr ""
 
-#: src/prefs/dataPage.js:63
+#: src/prefs/dataPage.js:94
 msgid "Plan"
 msgstr ""
 
-#: src/prefs/dataPage.js:64
+#: src/prefs/dataPage.js:95
 msgid "For the badge and the plan value"
 msgstr ""
 
-#: src/prefs/dataPage.js:67
+#: src/prefs/dataPage.js:98
 #, javascript-format
 msgid "Automatic (%s)"
 msgstr ""
 
-#: src/prefs/dataPage.js:67
+#: src/prefs/dataPage.js:98
 msgid "Automatic"
 msgstr ""
 
-#: src/prefs/dataPage.js:75
+#: src/prefs/dataPage.js:106
 #, javascript-format
 msgid "Claude Code Folder (empty: %s)"
 msgstr ""
 
-#: src/prefs/dataPage.js:86 src/prefs/dataPage.js:90
-msgid "Direct Mode"
-msgstr ""
-
-#: src/prefs/dataPage.js:87
-msgid ""
-"Asks Anthropic for account-wide figures, including use on other devices and "
-"model limits such as Fable. Off by default: it uses an undocumented service "
-"with Claude Code’s sign-in."
-msgstr ""
-
-#: src/prefs/dataPage.js:90
-msgid "Read-only; the sign-in is never changed or renewed"
-msgstr ""
-
-#: src/prefs/dataPage.js:96
-msgid "Check Every"
-msgstr ""
-
-#: src/prefs/dataPage.js:97
-msgid "Minutes between requests. Anthropic limits how often this may be asked."
-msgstr ""
-
-#: src/prefs/dataPage.js:105
-msgid "What Direct Mode Does"
-msgstr ""
-
-#: src/prefs/dataPage.js:140
+#: src/prefs/dataPage.js:145
 msgid ""
 "Claude Code’s settings.json could not be read; fix it in Claude Code first."
 msgstr ""
 
-#: src/prefs/dataPage.js:143
+#: src/prefs/dataPage.js:148
 msgid "Installed, showing your previous status line"
 msgstr ""
 
-#: src/prefs/dataPage.js:143
+#: src/prefs/dataPage.js:148
 msgid "Installed"
 msgstr ""
 
-#: src/prefs/dataPage.js:146
+#: src/prefs/dataPage.js:151
 msgid "Not installed. Your status line keeps showing after installing."
 msgstr ""
 
-#: src/prefs/dataPage.js:146
+#: src/prefs/dataPage.js:151
 msgid "Not installed"
 msgstr ""
 
-#: src/prefs/dataPage.js:149
+#: src/prefs/dataPage.js:154
 msgid "Remove"
 msgstr ""
 
-#: src/prefs/dataPage.js:149
+#: src/prefs/dataPage.js:154
 msgid "Install…"
 msgstr ""
 
-#: src/prefs/dataPage.js:155
+#: src/prefs/dataPage.js:160
 #, javascript-format
 msgid "%s ago"
 msgstr ""
 
-#: src/prefs/dataPage.js:156
+#: src/prefs/dataPage.js:161
 msgid "None yet"
 msgstr ""
 
-#: src/prefs/dataPage.js:170
+#: src/prefs/dataPage.js:175
 msgid "Bridge removed"
 msgstr ""
 
-#: src/prefs/dataPage.js:177
+#: src/prefs/dataPage.js:182
 msgid "(none)"
 msgstr ""
 
-#: src/prefs/dataPage.js:179
+#: src/prefs/dataPage.js:184
 msgid "Install the Status-Line Bridge?"
 msgstr ""
 
-#: src/prefs/dataPage.js:180
+#: src/prefs/dataPage.js:185
 #, javascript-format
 msgid ""
 "QuotaBuddy changes one setting in %s. Removing the bridge here puts it back."
 msgstr ""
 
-#: src/prefs/dataPage.js:190
+#: src/prefs/dataPage.js:195
 msgid "statusLine now"
 msgstr ""
 
-#: src/prefs/dataPage.js:191
+#: src/prefs/dataPage.js:196
 msgid "statusLine after"
 msgstr ""
 
-#: src/prefs/dataPage.js:194
+#: src/prefs/dataPage.js:199
 msgid "Install"
 msgstr ""
 
-#: src/prefs/dataPage.js:202
+#: src/prefs/dataPage.js:207
 msgid "Bridge installed. Figures arrive after the next reply in Claude Code."
 msgstr ""
 
-#: src/prefs/dataPage.js:227
+#: src/prefs/dataPage.js:232
 msgid "Turn On Direct Mode?"
 msgstr ""
 
-#: src/prefs/dataPage.js:229
+#: src/prefs/dataPage.js:234
 msgid ""
 "Direct mode asks api.anthropic.com for your usage with the sign-in Claude "
 "Code saved on this computer."
 msgstr ""
 
-#: src/prefs/dataPage.js:230
+#: src/prefs/dataPage.js:235
 msgid ""
 "This service is undocumented and may change or stop working at any time. "
 "Anthropic’s Consumer Terms allow the subscription sign-in only in Claude "
 "Code and claude.ai, so using it here may go against them."
 msgstr ""
 
-#: src/prefs/dataPage.js:232
+#: src/prefs/dataPage.js:237
 msgid ""
 "QuotaBuddy only reads the sign-in, keeps it in memory, sends it nowhere but "
 "api.anthropic.com, and never renews or changes it."
 msgstr ""
 
-#: src/prefs/dataPage.js:236
+#: src/prefs/dataPage.js:241
 msgid "Turn On"
 msgstr ""

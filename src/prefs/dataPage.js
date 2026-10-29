@@ -41,9 +41,40 @@ class QuotaBuddyDataPage extends Adw.PreferencesPage {
         this._settings = settings;
         this._path = path;
 
+        const direct = new Adw.PreferencesGroup({
+            title: _('Direct Mode (Recommended)'),
+            description: _('The most complete figures: asks Anthropic every few minutes for your whole account, including the desktop app, ' +
+                'other devices and model limits such as Fable. It uses an undocumented service with Claude Code’s sign-in, ' +
+                'so it is off until you turn it on and read what that means.'),
+        });
+        this._directRow = new Adw.SwitchRow({title: _('Direct Mode'), subtitle: _('Read-only; the sign-in is never changed or renewed')});
+        this._directRow.active = settings.get_boolean('direct-mode') && settings.get_boolean('direct-accepted');
+        this._directRow.connect('notify::active', () => {
+            this._onDirectToggled();
+            this._refresh();
+        });
+        direct.add(this._directRow);
+
+        const interval = new Adw.SpinRow({
+            title: _('Check Every'),
+            subtitle: _('Minutes between requests. Anthropic limits how often this may be asked.'),
+            adjustment: new Gtk.Adjustment({lower: 2, upper: 30, step_increment: 1, page_increment: 5}),
+        });
+        interval.value = Math.round(settings.get_uint('direct-interval') / 60);
+        interval.connect('notify::value', () => settings.set_uint('direct-interval', Math.round(interval.value) * 60));
+        this._directRow.bind_property('active', interval, 'sensitive', GObject.BindingFlags.SYNC_CREATE);
+        direct.add(interval);
+
+        const privacy = new Adw.ActionRow({title: _('What Direct Mode Does'), activatable: true});
+        privacy.add_suffix(new Gtk.Image({icon_name: 'adw-external-link-symbolic'}));
+        privacy.connect('activated', () => new Gtk.UriLauncher({uri: DOCS}).launch(window, null, null));
+        direct.add(privacy);
+        this.add(direct);
+
         const bridge = new Adw.PreferencesGroup({
             title: _('Claude Code Status Line'),
-            description: _('Claude Code passes your session and weekly limits to its status line after each reply. ' +
+            description: _('Works without any network use, but less complete: Claude Code only passes the session and weekly limits ' +
+                'to its status line after replies in a terminal (not the desktop app), and leaves the session out after it resets. ' +
                 'QuotaBuddy adds a small bridge there to receive them. A status line you already have keeps showing.'),
         });
         this._bridgeRow = new Adw.ActionRow({title: _('Status-Line Bridge')});
@@ -81,32 +112,6 @@ class QuotaBuddyDataPage extends Adw.PreferencesPage {
         });
         account.add(folder);
         this.add(account);
-
-        const direct = new Adw.PreferencesGroup({
-            title: _('Direct Mode'),
-            description: _('Asks Anthropic for account-wide figures, including use on other devices and model limits such as Fable. ' +
-                'Off by default: it uses an undocumented service with Claude Code’s sign-in.'),
-        });
-        this._directRow = new Adw.SwitchRow({title: _('Direct Mode'), subtitle: _('Read-only; the sign-in is never changed or renewed')});
-        this._directRow.active = settings.get_boolean('direct-mode') && settings.get_boolean('direct-accepted');
-        this._directRow.connect('notify::active', () => this._onDirectToggled());
-        direct.add(this._directRow);
-
-        const interval = new Adw.SpinRow({
-            title: _('Check Every'),
-            subtitle: _('Minutes between requests. Anthropic limits how often this may be asked.'),
-            adjustment: new Gtk.Adjustment({lower: 2, upper: 30, step_increment: 1, page_increment: 5}),
-        });
-        interval.value = Math.round(settings.get_uint('direct-interval') / 60);
-        interval.connect('notify::value', () => settings.set_uint('direct-interval', Math.round(interval.value) * 60));
-        this._directRow.bind_property('active', interval, 'sensitive', GObject.BindingFlags.SYNC_CREATE);
-        direct.add(interval);
-
-        const privacy = new Adw.ActionRow({title: _('What Direct Mode Does'), activatable: true});
-        privacy.add_suffix(new Gtk.Image({icon_name: 'adw-external-link-symbolic'}));
-        privacy.connect('activated', () => new Gtk.UriLauncher({uri: DOCS}).launch(window, null, null));
-        direct.add(privacy);
-        this.add(direct);
 
         this._refresh();
         // The reading age changes while the window is open.
@@ -147,7 +152,7 @@ class QuotaBuddyDataPage extends Adw.PreferencesPage {
             this._bridgeButton.sensitive = true;
         }
         this._bridgeButton.label = installed ? _('Remove') : _('Install…');
-        this._bridgeButton.css_classes = installed ? [] : ['suggested-action'];
+        this._bridgeButton.css_classes = installed || this._directRow.active ? [] : ['suggested-action'];
 
         const record = readJsonFile(bridgeFile());
         this._lastLabel.label = record?.updatedAt

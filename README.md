@@ -33,10 +33,9 @@ Claude's Pro and Max plans come with a rolling **5-hour session** limit and a **
 - **Colour that warns early:** amber at 75 % used, red at 90 %, and amber as soon as the pace says you will reach the limit before it resets.
 - **Dropdown sections** (each can be turned off): pace forecast, activity for the last 24 hours or 7 days stacked by model, cost at API prices (today, 7 days, this month, and how that compares with your plan's price), busiest projects and session, cache use.
 - **Plan badge:** Pro, Max 5×, Max 20×, read from Claude Code's sign-in, or chosen by hand.
-- **One-click setup:** the settings install a small status-line bridge for Claude Code, after showing exactly what changes. A status line you already have keeps showing.
+- **Two ways to get your limits:** direct mode (recommended) for current, account-wide figures, or a small status-line bridge for Claude Code that uses no network, installed after showing exactly what changes.
 - **Long history:** QuotaBuddy keeps its own daily summary of your use, so charts and costs survive Claude Code's 30-day log cleanup.
 - **Light on the system:** Claude Code's logs (hundreds of megabytes a week) are read in a separate process, and only what is new since the last read.
-- **Optional direct mode** for account-wide figures, off by default and explained before you turn it on.
 - **Helpful About page:** release notes, links to the docs, settings export/import and a *Copy Debug Info* button for bug reports.
 
 ## Screenshots
@@ -86,10 +85,10 @@ make install
 
 ## Quick start
 
-1. **Open the settings** (click the pill → Settings) and go to the **Data** page.
-2. **Install the status-line bridge.** QuotaBuddy shows the one line it adds to Claude Code's `settings.json`; click *Install*.
-3. **Send a message in Claude Code.** After its reply, the session and week rings fill in.
-4. *Optional:* on the **Display** page, choose other figures, a different style, or what is left versus used.
+1. **Open the settings** (right-click the pill → Settings) and go to the **Data** page.
+2. **Turn on direct mode** (recommended). Read what it does, then click *Turn On*; the rings fill in within seconds.
+   Or, to use no network, **install the status-line bridge** instead: its figures only update after replies in Claude Code in a terminal.
+3. *Optional:* on the **Display** page, choose other figures, a different style, or what is left versus used.
 
 Activity, cost and projects work straight away: they come from Claude Code's logs. The full walk-through is in [Getting started](docs/getting-started.md).
 
@@ -105,10 +104,10 @@ Activity, cost and projects work straight away: they come from Claude Code's log
 ## FAQ
 
 **Where do the limits come from?**
-From Claude Code. After every reply it passes your session and weekly limits to its status line, and QuotaBuddy's bridge saves them. So the rings update while you use Claude Code on this computer.
+With direct mode (recommended), from Anthropic every few minutes, for your whole account. Without it, from Claude Code's status line, which only gets new figures after replies in Claude Code in a terminal: not from the desktop app, other devices or claude.ai.
 
-**I also use Claude on my laptop or on claude.ai. Are the figures right?**
-The limits are account-wide, so every reading includes all your devices. But this computer only gets a new reading when Claude Code replies here; until then you see the last one, with its age in the dropdown. Direct mode asks Anthropic directly and stays current. Activity, cost and projects only count Claude Code on this computer.
+**I also use the desktop app, my laptop or claude.ai. Are the figures right?**
+With direct mode, yes. With the status line only, the figures are as old as your last terminal reply on this computer; the dropdown shows their age and says when they are out of date. Activity, cost and projects come from Claude Code's logs on this computer, desktop app included.
 
 **Why is there no "Sign in with Claude"?**
 Anthropic offers no sign-in for other apps to read subscription usage. QuotaBuddy uses what Claude Code already writes on your computer.
