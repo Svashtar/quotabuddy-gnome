@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="quotabuddy">
+  <enum id="org.gnome.shell.extensions.quotabuddy.panel-style">
+    <value nick="rings-percent" value="0"/>
+    <value nick="bars-percent" value="1"/>
+    <value nick="rings" value="2"/>
+    <value nick="text" value="3"/>
+  </enum>
+  <enum id="org.gnome.shell.extensions.quotabuddy.pill-style">
+    <value nick="none" value="0"/>
+    <value nick="subtle" value="1"/>
+    <value nick="accent" value="2"/>
+  </enum>
+  <enum id="org.gnome.shell.extensions.quotabuddy.activity-range">
+    <value nick="day" value="0"/>
+    <value nick="week" value="1"/>
+  </enum>
+
+  <schema id="org.gnome.shell.extensions.quotabuddy" path="/org/gnome/shell/extensions/quotabuddy/">
+    <key name="panel-figures" type="as">
+      <default>['session', 'week']</default>
+      <summary>Top bar figures</summary>
+      <description>Shown left to right: "session", "week", "model-week", "reset", "tokens-today", "cost-today".</description>
+    </key>
+    <key name="panel-style" enum="org.gnome.shell.extensions.quotabuddy.panel-style">
+      <default>'rings-percent'</default>
+      <summary>Top bar style</summary>
+    </key>
+    <key name="show-left" type="b">
+      <default>true</default>
+      <summary>Show what is left</summary>
+      <description>Show the share of a limit that is left instead of the share used.</description>
+    </key>
+    <key name="pill-style" enum="org.gnome.shell.extensions.quotabuddy.pill-style">
+      <default>'subtle'</default>
+      <summary>Top bar background</summary>
+    </key>
+    <key name="popup-sections" type="as">
+      <default>['pace', 'activity', 'cost', 'projects']</default>
+      <summary>Dropdown sections</summary>
+      <description>Sections shown below the limits: "pace", "activity", "cost", "projects".</description>
+    </key>
+    <key name="activity-range" enum="org.gnome.shell.extensions.quotabuddy.activity-range">
+      <default>'day'</default>
+      <summary>Activity chart range</summary>
+      <description>The last 24 hours by hour, or the last 7 days by day.</description>
+    </key>
+    <key name="direct-mode" type="b">
+      <default>false</default>
+      <summary>Direct mode</summary>
+      <description>Ask Anthropic for account-wide usage with Claude Code's sign-in. Undocumented; see the warning in the settings.</description>
+    </key>
+    <key name="direct-accepted" type="b">
+      <default>false</default>
+      <summary>Direct mode warning accepted</summary>
+    </key>
+    <key name="direct-interval" type="u">
+      <range min="120" max="1800"/>
+      <default>300</default>
+      <summary>Direct mode interval</summary>
+      <description>Seconds between requests in direct mode.</description>
+    </key>
+    <key name="plan-override" type="s">
+      <choices>
+        <choice value=""/>
+        <choice value="pro"/>
+        <choice value="max-5x"/>
+        <choice value="max-20x"/>
+        <choice value="team"/>
+        <choice value="enterprise"/>
+      </choices>
+      <default>''</default>
+      <summary>Plan</summary>
+      <description>Empty: read from Claude Code's sign-in.</description>
+    </key>
+    <key name="claude-config-dir" type="s">
+      <default>''</default>
+      <summary>Claude Code folder</summary>
+      <description>Empty: CLAUDE_CONFIG_DIR, else ~/.claude.</description>
+    </key>
+  </schema>
+</schemalist>

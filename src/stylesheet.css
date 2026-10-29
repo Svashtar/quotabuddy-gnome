@@ -1,0 +1,214 @@
+/* SPDX-License-Identifier: GPL-2.0-or-later */
+/* SPDX-FileCopyrightText: 2026 Mitja Cebokli */
+/* Generated with AI for personal use. */
+/* Do NOT upload to extensions.gnome.org (EGO) unless you understand JavaScript */
+/* and can maintain this code. */
+
+/* Everything is scoped to quotabuddy-* classes. Gauges draw with their CSS
+   `color`; the track uses -quotabuddy-track. St has no color-mix(); colours
+   use st-transparentize(). */
+
+/* ---- severity colours (gauges use `color`, labels the *-text classes) ---- */
+.quotabuddy-normal { color: #8fd694; }
+.quotabuddy-warning { color: #f5c26b; }
+.quotabuddy-critical { color: #f38b8b; }
+.quotabuddy-idle { color: rgba(255, 255, 255, 0.45); }
+.quotabuddy-project { color: -st-accent-color; }
+.quotabuddy-warning-text { color: #f5c26b; }
+.quotabuddy-critical-text { color: #f38b8b; }
+.quotabuddy-idle-text { color: rgba(255, 255, 255, 0.55); }
+
+.quotabuddy-gauge { -quotabuddy-track: rgba(255, 255, 255, 0.16); }
+
+/* ---- top bar ---- */
+#panel .quotabuddy-button {
+  -natural-hpadding: 6px;
+  -minimum-hpadding: 4px;
+}
+
+.quotabuddy-pill {
+  border-radius: 999px;
+  margin: 3px 0;
+  padding: 0 8px;
+  spacing: 10px;
+}
+
+.quotabuddy-pill.quotabuddy-pill-subtle {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.quotabuddy-pill.quotabuddy-pill-accent {
+  background-color: st-transparentize(-st-accent-color, 0.65);
+}
+
+.quotabuddy-pill.quotabuddy-pill-none {
+  padding: 0 2px;
+}
+
+.quotabuddy-figure { spacing: 5px; }
+
+.quotabuddy-panel-ring {
+  width: 15px;
+  height: 15px;
+}
+
+.quotabuddy-panel-bar {
+  width: 22px;
+  height: 5px;
+}
+
+.quotabuddy-figure-label {
+  font-feature-settings: "tnum";
+  font-weight: 600;
+}
+
+/* ---- dropdown ---- */
+.quotabuddy-menu .popup-menu-content { padding: 6px; }
+
+.quotabuddy-item,
+.quotabuddy-item:hover,
+.quotabuddy-item:focus {
+  padding: 0;
+  background-color: transparent;
+}
+
+.quotabuddy-content {
+  width: 360px;
+  padding: 10px 12px 4px;
+  spacing: 14px;
+}
+
+.quotabuddy-header { spacing: 8px; }
+.quotabuddy-title { font-size: 1.15em; font-weight: 800; }
+
+.quotabuddy-badge {
+  font-size: 0.8em;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 999px;
+  color: -st-accent-fg-color;
+  background-color: -st-accent-color;
+}
+
+.quotabuddy-dim { color: rgba(255, 255, 255, 0.6); }
+.quotabuddy-small { font-size: 0.85em; }
+.quotabuddy-stale { color: #f5c26b; }
+
+.quotabuddy-empty { spacing: 6px; padding: 12px 0; }
+.quotabuddy-empty-title { font-weight: 700; font-size: 1.05em; }
+
+.quotabuddy-hero {
+  spacing: 10px;
+  padding: 14px 4px 12px;
+  border-radius: 16px;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.quotabuddy-hero-card { spacing: 3px; }
+
+.quotabuddy-hero-ring {
+  width: 92px;
+  height: 92px;
+}
+
+.quotabuddy-hero-pct {
+  font-size: 1.55em;
+  font-weight: 800;
+  font-feature-settings: "tnum";
+}
+
+.quotabuddy-hero-name { font-weight: 700; margin-top: 6px; }
+
+.quotabuddy-section { spacing: 8px; }
+.quotabuddy-section-head { spacing: 8px; }
+
+.quotabuddy-section-title {
+  font-size: 0.8em;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.quotabuddy-bar-row { spacing: 4px; }
+.quotabuddy-row-name { font-weight: 600; }
+.quotabuddy-row-value { font-weight: 700; font-feature-settings: "tnum"; }
+.quotabuddy-note { margin-left: 6px; }
+.quotabuddy-row-bar { height: 6px; }
+
+.quotabuddy-pace-row { spacing: 8px; }
+
+.quotabuddy-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+}
+
+.quotabuddy-dot-normal { background-color: #8fd694; }
+.quotabuddy-dot-warning { background-color: #f5c26b; }
+
+.quotabuddy-chart { height: 72px; color: #ffffff; }
+.quotabuddy-axis { margin-top: -2px; }
+
+.quotabuddy-legend { spacing: 12px; }
+.quotabuddy-legend-item { spacing: 5px; }
+
+.quotabuddy-swatch {
+  width: 9px;
+  height: 9px;
+  border-radius: 3px;
+}
+
+.quotabuddy-switch {
+  border-radius: 999px;
+  padding: 2px;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.quotabuddy-switch-button {
+  font-size: 0.8em;
+  font-weight: 600;
+  padding: 2px 10px;
+  border-radius: 999px;
+}
+
+.quotabuddy-switch-button:hover { background-color: rgba(255, 255, 255, 0.1); }
+.quotabuddy-switch-button:focus { box-shadow: inset 0 0 0 2px st-transparentize(-st-accent-color, 0.4); }
+
+.quotabuddy-switch-active,
+.quotabuddy-switch-active:hover {
+  color: -st-accent-fg-color;
+  background-color: -st-accent-color;
+}
+
+.quotabuddy-cards { spacing: 8px; }
+
+.quotabuddy-card {
+  padding: 10px 12px;
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.06);
+  spacing: 2px;
+}
+
+.quotabuddy-card-value {
+  font-size: 1.2em;
+  font-weight: 800;
+  font-feature-settings: "tnum";
+}
+
+.quotabuddy-line { margin-top: 2px; }
+
+.quotabuddy-footer {
+  spacing: 6px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.quotabuddy-footer-button {
+  padding: 8px;
+  border-radius: 10px;
+}
+
+.quotabuddy-footer-button:hover,
+.quotabuddy-footer-button:focus { background-color: rgba(255, 255, 255, 0.1); }
+
+.quotabuddy-footer-icon { icon-size: 14px; margin-right: 6px; }

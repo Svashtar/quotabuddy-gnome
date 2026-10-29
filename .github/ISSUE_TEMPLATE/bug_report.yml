@@ -1,0 +1,82 @@
+name: Bug report
+description: Something doesn't work as it should.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a problem! Please check [Troubleshooting](https://github.com/Svashtar/quotabuddy-gnome/blob/main/docs/troubleshooting.md) and existing issues first.
+  - type: textarea
+    id: debug-info
+    attributes:
+      label: Debug info
+      description: Open the extension's settings → **About** → **Copy Debug Info**, then paste it here. It contains versions, settings and which data sources have data, never tokens, project names or usage figures.
+      render: text
+      placeholder: |
+        QuotaBuddy: 0.1.0
+        GNOME Shell: 51.1
+        ...
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: A short description of the problem.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Install the status-line bridge
+        2. Send a message in Claude Code
+        3. ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behaviour
+      description: Screenshots of the top bar or the dropdown are welcome. Crop out anything private.
+    validations:
+      required: true
+  - type: dropdown
+    id: source
+    attributes:
+      label: Data source
+      options:
+        - Status-line bridge only
+        - Direct mode
+        - Not sure
+  - type: textarea
+    id: extensions
+    attributes:
+      label: Other enabled extensions
+      description: Output of `gnome-extensions list --enabled`. Top-bar extensions often interact.
+      render: text
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: |
+        Shell log: run `journalctl -f -o cat /usr/bin/gnome-shell`, reproduce the problem, then paste the lines around it.
+        Preferences window problems: `journalctl -f -o cat /usr/bin/gjs`.
+        See [Collecting logs](https://github.com/Svashtar/quotabuddy-gnome/blob/main/docs/troubleshooting.md#collecting-logs).
+      render: text
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I searched existing issues and this hasn't been reported.
+          required: true
+        - label: I removed tokens and anything private from the logs above.
+          required: true

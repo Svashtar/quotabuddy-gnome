@@ -1,0 +1,12 @@
+{
+  "uuid": "quotabuddy@svashta.com",
+  "name": "QuotaBuddy",
+  "description": "Your Claude usage limits in the top bar: the 5-hour session and the weekly limit as small rings, with what is left.\n\nClick for the full picture: reset countdowns, whether you are on pace, activity charts by model, what your use would cost at API prices and your busiest projects.\n\nReads Claude Code's status line (installed with one click in the settings) and its local logs. An optional direct mode asks Anthropic for account-wide figures using Claude Code's sign-in; it is off by default and explained before you turn it on.\n\nClipboard: Settings → About → Copy Debug Info copies a report to the clipboard when you click it.",
+  "shell-version": [
+    "51"
+  ],
+  "url": "https://github.com/Svashtar/quotabuddy-gnome",
+  "settings-schema": "org.gnome.shell.extensions.quotabuddy",
+  "gettext-domain": "quotabuddy",
+  "version-name": "0.1.0"
+}
