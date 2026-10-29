@@ -19,3 +19,5 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - Until there are usage limits to show, the top bar shows the QuotaBuddy icon rather than empty rings.
 - Without direct mode, the dropdown says when the figures are out of date and why.
 - The dropdown scrolls when it is taller than the screen.
+- A model's own weekly limit (such as Fable) shows in that model's colour in the top bar and the dropdown, so it is told apart from the session and week.
+- The Pace section explains the tick on the large rings.

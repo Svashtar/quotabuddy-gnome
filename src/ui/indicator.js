@@ -23,6 +23,8 @@ import {severity, formatDuration} from '../lib/limits.js';
 import {summarySince, startOfDay, totalTokens} from '../lib/history.js';
 import {formatTokens, formatMoney, shownPct} from '../lib/format.js';
 import {Gauge} from './gauge.js';
+import {familyColorCss} from './chart.js';
+import {modelFamily} from '../lib/pricing.js';
 import {Popup} from './popup.js';
 
 const USAGE_URL = 'https://claude.ai/settings/usage';
@@ -186,6 +188,11 @@ class QuotaBuddyIndicator extends PanelMenu.Button {
                     style_class: `quotabuddy-panel-${shape} quotabuddy-${item.level}`,
                     y_align: Clutter.ActorAlign.CENTER,
                 });
+                // A model's own limit in its family colour (as in the activity
+                // chart), so it stands apart from the session and week rings;
+                // amber and red still win.
+                if (item.family && item.level === 'normal')
+                    gauge.style = familyColorCss(item.family);
                 gauge.setValue(item.fraction);
                 box.add_child(gauge);
             }
@@ -233,7 +240,7 @@ class QuotaBuddyIndicator extends PanelMenu.Button {
         }
         case 'model-week': {
             const w = byKind('model-week');
-            return w ? pctItem(w, w.model?.[0] ?? 'M', w.model ?? _('Model')) : null;
+            return w ? {...pctItem(w, w.model?.[0] ?? 'M', w.model ?? _('Model')), family: modelFamily(w.model)} : null;
         }
         case 'reset': {
             const w = byKind('session');

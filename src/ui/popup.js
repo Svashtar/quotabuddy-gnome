@@ -21,7 +21,7 @@ import {hourlySeries, dailySeries, summarySince, startOfDay, ranked, recentSessi
 import {modelFamily, modelLabel, PRICES_AS_OF} from '../lib/pricing.js';
 import {formatMoney, formatClock, shownPct} from '../lib/format.js';
 import {Gauge} from './gauge.js';
-import {StackedChart, FAMILY_COLORS, FAMILY_ORDER} from './chart.js';
+import {StackedChart, FAMILY_COLORS, FAMILY_ORDER, familyColorCss} from './chart.js';
 
 const DAY = 24 * 3600 * 1000;
 const STALE_MS = 10 * 60 * 1000;
@@ -255,8 +255,10 @@ export class Popup {
         const box = vbox('quotabuddy-section');
         for (const w of models) {
             const pct = shownPct(w.usedPct, showLeft);
-            box.add_child(this._barRow(windowName(w), pct / 100, `${pct}%`, w.expired ? 'idle' : severity(w.usedPct),
-                                       w.resetsAt ? _('resets %s').format(formatClock(w.resetsAt, now)) : null));
+            const level = w.expired ? 'idle' : severity(w.usedPct);
+            box.add_child(this._barRow(windowName(w), pct / 100, `${pct}%`, level,
+                                       w.resetsAt ? _('resets %s').format(formatClock(w.resetsAt, now)) : null,
+                                       level === 'normal' ? familyColorCss(modelFamily(w.model)) : null));
         }
         if (spend) {
             box.add_child(this._barRow(_('Extra usage'), spend.usedPct / 100,
@@ -265,7 +267,8 @@ export class Popup {
         return box;
     }
 
-    _barRow(name, fraction, value, level, note) {
+    // barStyle: inline CSS for the bar, e.g. a model family's colour
+    _barRow(name, fraction, value, level, note, barStyle = null) {
         const row = vbox('quotabuddy-bar-row');
         const top = hbox();
         top.add_child(label(name, 'quotabuddy-row-name'));
@@ -275,6 +278,8 @@ export class Popup {
         top.add_child(label(value, `quotabuddy-row-value quotabuddy-${level}-text`));
         row.add_child(top);
         const bar = new Gauge({shape: 'bar', style_class: `quotabuddy-row-bar quotabuddy-${level}`, x_expand: true});
+        if (barStyle)
+            bar.style = barStyle;
         bar.setValue(fraction);
         row.add_child(bar);
         return row;
@@ -283,6 +288,9 @@ export class Popup {
 
     _pace(windows, now) {
         const box = this._section(_('Pace'));
+        // Explains the ticks on the large rings, where the reader looks for pace.
+        if (windows.some(w => !w.expired && this._provider.forecast(w).expectedPct !== null))
+            box.add_child(wrap(label(_('The tick on each ring is where an even pace would be.'), 'quotabuddy-dim quotabuddy-small')));
         for (const w of windows) {
             const fc = this._provider.forecast(w);
             const used = Math.round(w.usedPct);

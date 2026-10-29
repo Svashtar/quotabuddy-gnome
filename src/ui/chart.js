@@ -22,6 +22,12 @@ export const FAMILY_COLORS = {
 
 export const FAMILY_ORDER = ['fable', 'mythos', 'opus', 'sonnet', 'haiku', 'other'];
 
+// Inline CSS that tints a gauge (which draws with `color`) in a family's colour.
+export function familyColorCss(family) {
+    const [r, g, b] = (FAMILY_COLORS[family] ?? FAMILY_COLORS.other).map(c => Math.round(c * 255));
+    return `color: rgb(${r}, ${g}, ${b});`;
+}
+
 export const StackedChart = GObject.registerClass(
 class QuotaBuddyStackedChart extends St.DrawingArea {
     _init(params = {}) {

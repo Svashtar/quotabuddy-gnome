@@ -39,12 +39,14 @@ Each figure is a small ring (or bar) and a number. By default you see the **sess
 | Red | 90 % used |
 | Grey | No current reading (for example right after a reset) |
 
+A model's own weekly limit, such as Fable's, uses that model's colour from the activity chart instead of green, so it stands apart from the session and week. It still turns amber or red.
+
 On **Display** you can add the time to the session reset, a model's own weekly limit, tokens today or cost today; switch to bars, rings only or text; show what is used instead; and change the pill background.
 
 ## The dropdown
 
 - **Header:** your plan and how old the newest reading is. Readings older than 10 minutes are shown in amber; without direct mode, a line under the rings also says how old they are.
-- **Rings:** what is left (or used) of each limit, when it resets, and a small tick where an even pace would be by now. A ring ahead of the tick means you are using it faster than the time passes.
+- **Rings:** what is left (or used) of each limit, when it resets, and a small tick where an even pace would be by now (the Pace section says so too). A ring ahead of the tick means you are using it faster than the time passes.
 - **Pace:** whether you are on track, and if not, when you would reach the limit at your current rate. For the session, the rate comes from the last hour; for the week, from the average since it started.
 - **Activity:** the last 24 hours by hour or the last 7 days by day, stacked by model family. Bars are weighted by API price, which follows how much of your limit a reply uses more closely than raw tokens.
 - **At API prices:** today, the last 7 days and this month, and how this month compares with your plan's price.
