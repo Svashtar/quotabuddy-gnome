@@ -3,7 +3,7 @@
 GNOME Shell 51+ extension (`quotabuddy@svashta.com`) that shows Claude's usage limits (5-hour
 session, week, model weeks) as rings in a top-bar pill, with a dropdown of pace, activity, cost
 and projects. Plain ESM GJS, no build step, no npm dependencies.
-GitHub: `Svashtar/quotabuddy-gnome` (not created yet).
+GitHub: `Svashtar/quotabuddy-gnome`.
 
 - Design, data sources and roadmap: [PLAN.md](PLAN.md)
 - Module map, processes, lifecycle: [docs/architecture.md](docs/architecture.md)

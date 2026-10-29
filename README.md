@@ -41,7 +41,7 @@ Claude's Pro and Max plans come with a rolling **5-hour session** limit and a **
 ## Screenshots
 
 <p align="center">
-  <img src="docs/screenshots/prefs-data.png" alt="Settings, Data page: status-line bridge, plan and direct mode" width="400">
+  <img src="docs/screenshots/prefs-data.png" alt="Settings, Data page: direct mode, status-line bridge and plan" width="400">
 </p>
 
 ## Requirements
