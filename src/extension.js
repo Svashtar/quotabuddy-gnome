@@ -22,6 +22,7 @@ export default class QuotaBuddyExtension extends Extension {
         this._indicator = new Indicator({
             settings: this._settings,
             provider: this._provider,
+            iconPath: `${this.path}/icons/quotabuddy-symbolic.svg`,
             openPreferences: () => this.openPreferences(),
         });
         Main.panel.addToStatusArea(this.uuid, this._indicator);

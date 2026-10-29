@@ -212,3 +212,5 @@
 .quotabuddy-footer-button:focus { background-color: rgba(255, 255, 255, 0.1); }
 
 .quotabuddy-footer-icon { icon-size: 14px; margin-right: 6px; }
+
+.quotabuddy-panel-icon { margin: 0 2px; }

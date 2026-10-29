@@ -5,13 +5,18 @@
 // and can maintain this code.
 
 // The top-bar button: a pill holding one small gauge and figure per chosen
-// item. Its menu is the dropdown (popup.js).
+// item. A left click opens the dropdown (popup.js), a right click a short
+// menu of quick actions. Both menus are our own, so the button handles the
+// clicks itself instead of PanelMenu.Button's single menu.
 
 import GObject from 'gi://GObject';
+import Gio from 'gi://Gio';
 import St from 'gi://St';
 import Clutter from 'gi://Clutter';
 
+import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import * as PanelMenu from 'resource:///org/gnome/shell/ui/panelMenu.js';
+import * as PopupMenu from 'resource:///org/gnome/shell/ui/popupMenu.js';
 import {gettext as _} from 'resource:///org/gnome/shell/extensions/extension.js';
 
 import {severity, formatDuration} from '../lib/limits.js';
@@ -19,6 +24,8 @@ import {summarySince, startOfDay, totalTokens} from '../lib/history.js';
 import {formatTokens, formatMoney, shownPct} from '../lib/format.js';
 import {Gauge} from './gauge.js';
 import {Popup} from './popup.js';
+
+const USAGE_URL = 'https://claude.ai/settings/usage';
 
 // Pace says the limit is hit before the reset: warn before the numbers do.
 function levelFor(window, fc) {
@@ -28,16 +35,46 @@ function levelFor(window, fc) {
 
 export const Indicator = GObject.registerClass(
 class QuotaBuddyIndicator extends PanelMenu.Button {
-    _init({settings, provider, openPreferences}) {
-        super._init(0.5, 'QuotaBuddy');
+    _init({settings, provider, iconPath, openPreferences}) {
+        super._init(0.5, 'QuotaBuddy', true);
         this._settings = settings;
         this._provider = provider;
+        this._openPreferences = openPreferences;
+        this._gicon = Gio.FileIcon.new(Gio.File.new_for_path(iconPath));
         this.add_style_class_name('quotabuddy-button');
 
         this._pill = new St.BoxLayout({style_class: 'quotabuddy-pill', y_align: Clutter.ActorAlign.CENTER});
         this.add_child(this._pill);
 
-        this._popup = new Popup({menu: this.menu, settings, provider, openPreferences});
+        this._main = this._addMenu();
+        this._popup = new Popup({menu: this._main, settings, provider, openPreferences});
+        this._quick = this._addMenu();
+        this._buildQuickMenu();
+
+        const click = new Clutter.ClickGesture({recognize_on_press: true});
+        click.connect('recognize', () => {
+            if (click.get_button() === Clutter.BUTTON_SECONDARY)
+                this._toggle(this._quick);
+            else
+                this._toggle(this._main);
+        });
+        this.add_action(click);
+
+        // Enter/space for the dropdown; the Menu key or Shift+F10, like a
+        // right click elsewhere, for the quick actions.
+        const keys = new Clutter.KeyController();
+        keys.connect('key-press', () => {
+            const [, symbol] = keys.get_key();
+            const shift = (keys.get_state() & Clutter.ModifierType.SHIFT_MASK) !== 0;
+            if (symbol === Clutter.KEY_Menu || (symbol === Clutter.KEY_F10 && shift))
+                this._toggle(this._quick);
+            else if ([Clutter.KEY_Return, Clutter.KEY_KP_Enter, Clutter.KEY_space].includes(symbol))
+                this._toggle(this._main);
+            else
+                return Clutter.EVENT_PROPAGATE;
+            return Clutter.EVENT_STOP;
+        });
+        this.add_action(keys);
 
         settings.connectObject(
             'changed::panel-figures', () => this.update(),
@@ -48,8 +85,62 @@ class QuotaBuddyIndicator extends PanelMenu.Button {
         this.connect('destroy', () => {
             this._settings.disconnectObject(this);
             this._popup.destroy();
+            this._main.destroy();
+            this._quick.destroy();
         });
         this.update();
+    }
+
+    // A panel menu like PanelMenu.Button's own, registered with the panel so
+    // keyboard navigation and closing on outside clicks work as usual.
+    _addMenu() {
+        const menu = new PopupMenu.PopupMenu(this, 0.5, St.Side.TOP);
+        menu.actor.add_style_class_name('panel-menu');
+        menu.connect('open-state-changed', () => {
+            if (this._main.isOpen || this._quick?.isOpen)
+                this.add_style_pseudo_class('active');
+            else
+                this.remove_style_pseudo_class('active');
+        });
+        Main.uiGroup.add_child(menu.actor);
+        menu.actor.hide();
+        Main.panel.menuManager.addMenu(menu);
+        return menu;
+    }
+
+    _toggle(menu) {
+        const other = menu === this._main ? this._quick : this._main;
+        if (other.isOpen)
+            other.close();
+        menu.toggle();
+    }
+
+    _buildQuickMenu() {
+        const menu = this._quick;
+        menu.addAction(_('Refresh Now'), () => this._provider.refresh());
+        this._showLeft = new PopupMenu.PopupSwitchMenuItem(_('Show What Is Left'), this._settings.get_boolean('show-left'));
+        this._showLeft.connect('toggled', (_item, state) => this._settings.set_boolean('show-left', state));
+        menu.addMenuItem(this._showLeft);
+        menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+        this._setup = menu.addAction(_('Set Up Usage Limits…'), () => this._openPreferences());
+        menu.addAction(_('Open Usage on claude.ai'), () => {
+            try {
+                Gio.AppInfo.launch_default_for_uri(USAGE_URL, global.create_app_launch_context(0, -1));
+            } catch (e) {
+                console.warn(`QuotaBuddy: could not open ${USAGE_URL}: ${e.message}`);
+            }
+        });
+        menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+        menu.addAction(_('Settings'), () => this._openPreferences());
+
+        // Kept current when it opens: the setting can change in the preferences.
+        menu.connect('open-state-changed', (_m, open) => {
+            if (!open)
+                return;
+            this._showLeft.setToggleState(this._settings.get_boolean('show-left'));
+            const status = this._provider.status;
+            this._setup.visible = !status.bridgeInstalled && !status.directMode;
+        });
     }
 
     update() {
@@ -60,6 +151,15 @@ class QuotaBuddyIndicator extends PanelMenu.Button {
         this._pill.style_class = `quotabuddy-pill quotabuddy-pill-${pill} quotabuddy-style-${style}`;
 
         const windows = this._provider.windows;
+        // No limits yet (first run, nothing set up): the QuotaBuddy icon, so the
+        // button is easy to find, rather than empty rings and dashes.
+        if (!windows.length) {
+            this._pill.add_child(new St.Icon({gicon: this._gicon, style_class: 'system-status-icon quotabuddy-panel-icon'}));
+            this.accessible_name = _('QuotaBuddy: no usage limits yet');
+            if (this._main.isOpen)
+                this._popup.update();
+            return;
+        }
         const items = this._settings.get_strv('panel-figures').map(f => this._item(f, windows, showLeft)).filter(Boolean);
         if (!items.length)
             items.push({label: '–', fraction: 0, level: 'idle', gauge: true, short: 'Q'});
@@ -90,7 +190,7 @@ class QuotaBuddyIndicator extends PanelMenu.Button {
             accessible.push(item.accessible ?? item.label);
         }
         this.accessible_name = `QuotaBuddy: ${accessible.join(', ')}`;
-        if (this.menu.isOpen)
+        if (this._main.isOpen)
             this._popup.update();
     }
 
