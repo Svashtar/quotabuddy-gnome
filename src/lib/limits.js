@@ -57,10 +57,16 @@ function makeWindow(kind, {usedPct, resetsAt, updatedAt, source, model = null}) 
 export function fromStatusLine(record) {
     const limits = record?.rateLimits ?? {};
     const common = {updatedAt: record?.updatedAt ?? 0, source: 'statusline'};
-    return [
+    const windows = [
         limits.five_hour && makeWindow('session', {...common, usedPct: limits.five_hour.used_percentage, resetsAt: limits.five_hour.resets_at}),
         limits.seven_day && makeWindow('week', {...common, usedPct: limits.seven_day.used_percentage, resetsAt: limits.seven_day.resets_at}),
     ].filter(Boolean);
+    // Claude Code drops a window from the status line once its reset time
+    // passes and only sends it again after the next reply. A reading with the
+    // week but no session therefore means the session has just reset.
+    if (windows.length && !windows.some(w => w.kind === 'session'))
+        windows.unshift({...makeWindow('session', {...common, usedPct: 0, resetsAt: null}), expired: true});
+    return windows;
 }
 
 // The direct-mode response. Newer responses carry a self-describing

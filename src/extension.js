@@ -23,7 +23,9 @@ export default class QuotaBuddyExtension extends Extension {
             settings: this._settings,
             provider: this._provider,
             iconPath: `${this.path}/icons/quotabuddy-symbolic.svg`,
-            openPreferences: () => this.openPreferences(),
+            // Rejected while the settings window is already open (GNOME allows
+            // only one); that is harmless, so don't log it as an error.
+            openPreferences: () => this.openPreferences().catch(() => {}),
         });
         Main.panel.addToStatusArea(this.uuid, this._indicator);
         this._provider.start();

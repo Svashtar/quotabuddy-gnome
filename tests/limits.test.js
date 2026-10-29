@@ -14,6 +14,14 @@ test('status line: both windows, seconds become ms', () => {
     ]);
 });
 
+test('status line: week without session means the session has reset', () => {
+    const w = fromStatusLine({updatedAt: 7, rateLimits: {seven_day: {used_percentage: 94, resets_at: 1700500000}}});
+    assertEqual(w.map(x => [x.id, x.usedPct, x.resetsAt, !!x.expired]), [
+        ['session', 0, null, true],
+        ['week', 94, 1700500000000, false],
+    ]);
+});
+
 test('status line: missing windows and bad values are skipped', () => {
     assertEqual(fromStatusLine({updatedAt: 1, rateLimits: {five_hour: {used_percentage: 'x'}}}), []);
     assertEqual(fromStatusLine(null), []);

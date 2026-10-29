@@ -11,6 +11,7 @@
 import GLib from 'gi://GLib';
 import St from 'gi://St';
 import Clutter from 'gi://Clutter';
+import Pango from 'gi://Pango';
 
 import * as PopupMenu from 'resource:///org/gnome/shell/ui/popupMenu.js';
 import {gettext as _} from 'resource:///org/gnome/shell/extensions/extension.js';
@@ -199,7 +200,11 @@ export class Popup {
                 reset = _('Resets in %s · %s').format(formatDuration(w.resetsAt - now), formatClock(w.resetsAt, now));
             else
                 reset = _('Reset time unknown');
-            card.add_child(label(reset, 'quotabuddy-dim quotabuddy-small', {x_align: Clutter.ActorAlign.CENTER}));
+            // Half the dropdown is too narrow for "Resets in 10h 33m · 02:00 AM".
+            const resetLabel = label(reset, 'quotabuddy-dim quotabuddy-small', {x_align: Clutter.ActorAlign.CENTER});
+            resetLabel.clutter_text.line_wrap = true;
+            resetLabel.clutter_text.line_alignment = Pango.Alignment.CENTER;
+            card.add_child(resetLabel);
             box.add_child(card);
         }
         return box;

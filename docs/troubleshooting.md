@@ -11,11 +11,13 @@ QuotaBuddy has no reading of your limits yet.
 
 ## The figures are old
 
-The bridge only receives a reading when Claude Code replies on this computer. The dropdown shows the age of the newest reading. Use on other devices or on claude.ai shows up with the next reply here, or straight away with direct mode.
+The bridge only receives a reading when Claude Code replies in a terminal on this computer; the Claude desktop app doesn't run the status line. The dropdown shows the age of the newest reading. Use on other devices or on claude.ai shows up with the next reply here, or straight away with direct mode.
 
 ## The ring is grey after a reset
 
 When a limit's reset time passes, QuotaBuddy shows it as fresh (0 % used) in grey until the next reading confirms the new figures.
+
+The session can also show *Reset, waiting for a reading* with no reset time. Claude Code leaves the 5-hour session out of the status line once it resets, and only sends it again after your next reply.
 
 ## The plan badge is wrong or missing
 
