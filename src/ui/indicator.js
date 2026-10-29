@@ -78,15 +78,9 @@ class QuotaBuddyIndicator extends PanelMenu.Button {
         });
         this.add_action(keys);
 
-        // Widest label width per figure; see update().
-        this._widths = new Map();
-        const restyle = () => {
-            this._widths.clear();
-            this.update();
-        };
         settings.connectObject(
-            'changed::panel-figures', restyle,
-            'changed::panel-style', restyle,
+            'changed::panel-figures', () => this.update(),
+            'changed::panel-style', () => this.update(),
             'changed::show-left', () => this.update(),
             'changed::pill-style', () => this.update(),
             this);
@@ -101,8 +95,12 @@ class QuotaBuddyIndicator extends PanelMenu.Button {
 
     // A panel menu like PanelMenu.Button's own, registered with the panel so
     // keyboard navigation and closing on outside clicks work as usual.
+    // Anchored to the button's right edge rather than its centre: the button
+    // sits in the panel's right box, so it grows and shrinks to the left as
+    // the figures change, and an open menu would otherwise slide sideways.
     _addMenu() {
-        const menu = new PopupMenu.PopupMenu(this, 0.5, St.Side.TOP);
+        const menu = new PopupMenu.PopupMenu(this, 1.0, St.Side.TOP);
+        menu.setSourceAlignment(1.0);
         menu.actor.add_style_class_name('panel-menu');
         menu.connect('open-state-changed', (_m, open) => {
             if (this._main.isOpen || this._quick?.isOpen)
@@ -179,12 +177,7 @@ class QuotaBuddyIndicator extends PanelMenu.Button {
                 this._popup.update();
             return;
         }
-        const items = this._settings.get_strv('panel-figures')
-            .map(f => {
-                const item = this._item(f, windows, showLeft);
-                return item && {...item, key: f};
-            })
-            .filter(Boolean);
+        const items = this._settings.get_strv('panel-figures').map(f => this._item(f, windows, showLeft)).filter(Boolean);
         if (!items.length)
             items.push({label: '–', fraction: 0, level: 'idle', gauge: true, short: 'Q'});
 
@@ -207,29 +200,15 @@ class QuotaBuddyIndicator extends PanelMenu.Button {
                 gauge.setValue(item.fraction);
                 box.add_child(gauge);
             }
-            let text = null;
-            const prefix = style === 'text' && item.short ? `${item.short} ` : '';
             if (style !== 'rings' || !item.gauge) {
-                text = new St.Label({
-                    text: `${prefix}${item.widest ?? item.label}`,
+                const text = style === 'text' && item.short ? `${item.short} ${item.label}` : item.label;
+                box.add_child(new St.Label({
+                    text,
                     style_class: `quotabuddy-figure-label quotabuddy-${item.level}-text`,
                     y_align: Clutter.ActorAlign.CENTER,
-                });
-                box.add_child(text);
+                }));
             }
             this._pill.add_child(box);
-            if (text) {
-                // Each figure keeps the widest width it has had (percentages
-                // start at "100%"), so the button doesn't change width as the
-                // numbers tick and the open dropdown, centred on it, stays put.
-                const [, natural] = text.get_preferred_width(-1);
-                const width = Math.max(this._widths.get(item.key) ?? 0, natural);
-                this._widths.set(item.key, width);
-                // Both: Clutter aborts the shell if the minimum exceeds the natural width.
-                text.min_width = width;
-                text.natural_width = width;
-                text.text = `${prefix}${item.label}`;
-            }
             accessible.push(item.accessible ?? item.label);
         }
         this.accessible_name = `QuotaBuddy: ${accessible.join(', ')}`;
@@ -244,7 +223,6 @@ class QuotaBuddyIndicator extends PanelMenu.Button {
             const pct = shownPct(w.usedPct, showLeft);
             return {
                 label: `${pct}%`,
-                widest: '100%',
                 fraction: pct / 100,
                 level: w.expired ? 'idle' : levelFor(w, this._provider.forecast(w)),
                 gauge: true,
