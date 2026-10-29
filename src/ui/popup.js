@@ -21,13 +21,14 @@ import {hourlySeries, dailySeries, summarySince, startOfDay, ranked, recentSessi
 import {modelFamily, modelLabel, PRICES_AS_OF} from '../lib/pricing.js';
 import {formatMoney, formatClock, shownPct} from '../lib/format.js';
 import {Gauge} from './gauge.js';
+import {fade} from './ink.js';
 import {StackedChart, FAMILY_COLORS, FAMILY_ORDER, familyColorCss} from './chart.js';
 
 const DAY = 24 * 3600 * 1000;
 const STALE_MS = 10 * 60 * 1000;
 const TICK_S = 30;
 
-const label = (text, style_class = '', params = {}) => new St.Label({text, style_class, ...params});
+const label = (text, style_class = '', params = {}) => fade(new St.Label({text, style_class, ...params}));
 const vbox = (style_class = '', params = {}) => new St.BoxLayout({orientation: Clutter.Orientation.VERTICAL, style_class, ...params});
 const hbox = (style_class = '', params = {}) => new St.BoxLayout({style_class, ...params});
 // Wrapping instead of ending in "…": the scrolled dropdown gives labels their

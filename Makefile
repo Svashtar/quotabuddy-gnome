@@ -49,7 +49,7 @@ pack: schemas
 			$(BUILD)/metadata.json $(COMMIT); fi
 	gnome-extensions pack $(BUILD) --force --out-dir=$(DIST) \
 		--extra-source=lib --extra-source=ui --extra-source=prefs --extra-source=providers \
-		--extra-source=bridge --extra-source=worker --extra-source=icons --extra-source=stylesheet-light.css \
+		--extra-source=bridge --extra-source=worker --extra-source=icons \
 		--extra-source=CHANGELOG.md --extra-source=LICENSE --podir=../po
 	@echo "Built $(DIST)/$(UUID).shell-extension.zip"
 	@if grep -rqF "$(AI_NOTICE)" $(SRC); then \

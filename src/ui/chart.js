@@ -10,6 +10,8 @@
 import GObject from 'gi://GObject';
 import St from 'gi://St';
 
+import {inkAround} from './ink.js';
+
 // Readable on light and dark panels; Opus uses Claude's own terracotta.
 export const FAMILY_COLORS = {
     fable: [0.62, 0.48, 0.95],
@@ -51,12 +53,12 @@ class QuotaBuddyStackedChart extends St.DrawingArea {
             const max = Math.max(...this._columns.map(c => Object.values(c.segments).reduce((s, v) => s + v, 0)), 1e-9);
             const gap = Math.max(1, Math.round(w / n * 0.25));
             const colW = (w - gap * (n - 1)) / n;
-            const fg = this.get_theme_node().get_foreground_color();
+            const ink = inkAround(this);
 
             this._columns.forEach((col, i) => {
                 const x = i * (colW + gap);
                 // Empty slots still show a faint baseline, so gaps read as time.
-                cr.setSourceRGBA(fg.red / 255, fg.green / 255, fg.blue / 255, 0.10);
+                cr.setSourceRGBA(ink[0], ink[1], ink[2], ink[3] * 0.12);
                 roundedRect(cr, x, h - 2, colW, 2, 1);
                 cr.fill();
 

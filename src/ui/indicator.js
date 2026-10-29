@@ -23,6 +23,7 @@ import {severity, formatDuration} from '../lib/limits.js';
 import {summarySince, startOfDay, totalTokens} from '../lib/history.js';
 import {formatTokens, formatMoney, shownPct} from '../lib/format.js';
 import {Gauge} from './gauge.js';
+import {fade} from './ink.js';
 import {familyColorCss} from './chart.js';
 import {modelFamily} from '../lib/pricing.js';
 import {Popup} from './popup.js';
@@ -202,11 +203,11 @@ class QuotaBuddyIndicator extends PanelMenu.Button {
             }
             if (style !== 'rings' || !item.gauge) {
                 const text = style === 'text' && item.short ? `${item.short} ${item.label}` : item.label;
-                box.add_child(new St.Label({
+                box.add_child(fade(new St.Label({
                     text,
                     style_class: `quotabuddy-figure-label quotabuddy-${item.level}-text`,
                     y_align: Clutter.ActorAlign.CENTER,
-                }));
+                })));
             }
             this._pill.add_child(box);
             accessible.push(item.accessible ?? item.label);

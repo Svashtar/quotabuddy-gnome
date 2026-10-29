@@ -5,13 +5,14 @@
 // and can maintain this code.
 
 // A ring or a bar (drawn in gaugeDraw.js). The filled part uses the widget's
-// CSS `color` (set per severity in stylesheet.css), the track the custom
-// `-quotabuddy-track` colour and the pace marker `-quotabuddy-marker`, so
-// themes and severities restyle it without code.
+// CSS `color` (set per severity in stylesheet.css); the track and the pace
+// marker the theme's text colour (see ink.js), unless a theme sets
+// `-quotabuddy-track` or `-quotabuddy-marker`.
 
 import GObject from 'gi://GObject';
 import St from 'gi://St';
 import {drawRing, drawBar} from './gaugeDraw.js';
+import {inkAround} from './ink.js';
 
 const rgba = c => [c.red / 255, c.green / 255, c.blue / 255, c.alpha / 255];
 
@@ -40,8 +41,11 @@ class QuotaBuddyGauge extends St.DrawingArea {
         const [w, h] = this.get_surface_size();
         const node = this.get_theme_node();
         const fg = rgba(node.get_foreground_color());
+        // The track and the pace marker take the theme's text colour, so they
+        // read on light and dark themes; a theme may still set its own.
+        const ink = inkAround(this);
         const [hasTrack, trackColor] = node.lookup_color('-quotabuddy-track', false);
-        const track = hasTrack ? rgba(trackColor) : [fg[0], fg[1], fg[2], fg[3] * 0.22];
+        const track = hasTrack ? rgba(trackColor) : [ink[0], ink[1], ink[2], ink[3] * 0.2];
         const [hasMarker, markerColor] = node.lookup_color('-quotabuddy-marker', false);
         const params = {
             fraction: this._fraction,
@@ -50,7 +54,7 @@ class QuotaBuddyGauge extends St.DrawingArea {
             markerRoom: this._markerRoom,
             fg,
             track,
-            markerColor: hasMarker ? rgba(markerColor) : [1, 1, 1, 1],
+            markerColor: hasMarker ? rgba(markerColor) : ink,
         };
         if (this._shape === 'bar')
             drawBar(cr, w, h, params);

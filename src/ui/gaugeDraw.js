@@ -7,9 +7,9 @@
 // The Cairo drawing behind Gauge, kept free of St so it can be rendered to
 // an image outside the shell to check how it looks.
 //
-// Colours are [r, g, b, a] in 0–1. The pace marker has its own colour
-// (white, dark in light mode), so it reads on the fill and the track and
-// doesn't look like part of the fill.
+// Colours are [r, g, b, a] in 0–1. The pace marker has its own colour (the
+// theme's text colour), so it reads on the fill and the track and doesn't
+// look like part of the fill.
 
 import Cairo from 'cairo';
 
