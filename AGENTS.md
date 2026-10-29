@@ -50,6 +50,14 @@ journalctl -b _COMM=gnome-shell -o cat --since -10min                           
   unless asked; use scratch `XDG_CACHE_HOME` / `XDG_DATA_HOME` / `XDG_CONFIG_HOME`.
 - The user runs Dash to Panel and a Catppuccin shell theme (user-theme). Scope CSS to
   `quotabuddy-*` classes. St CSS has no `color-mix()` or `opacity`; use `st-transparentize()`.
+  **No negative margins**: St overflows the height to 2^32 and the whole menu silently fails to
+  draw (the button still turns active).
+- Shell UI can be checked without a re-login in a throwaway headless shell:
+  `dbus-run-session -- gnome-shell --headless --virtual-monitor 1280x800 --wayland-display=<short>`
+  with scratch `XDG_DATA_HOME` (extension symlinked in), `XDG_CONFIG_HOME`
+  (`GSETTINGS_BACKEND=keyfile` enabling it), `XDG_CACHE_HOME`, and a short `XDG_RUNTIME_DIR`
+  (socket path must stay under 108 bytes). A second scratch extension can open the menus and
+  `print()` actor sizes.
 
 ## Claude data rules
 - **Never print, log or store the OAuth token.** Read `.credentials.json` for
