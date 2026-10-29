@@ -29,7 +29,7 @@ api.anthropic.com (direct mode, optional) ────────────�
 | `lib/settingsBackup.js`, `lib/debugInfo.js`, `lib/markdown.js` | any, pure | About page helpers |
 | `lib/paths.js` | any | File locations, atomic writes |
 | `providers/claude.js` | shell | All Claude data for the UI: `windows`, `plan`, `history`, `spend`, `status`, `forecast()`, `refresh()` |
-| `ui/gauge.js`, `ui/chart.js` | shell | Cairo ring/bar and stacked columns; colours from CSS |
+| `ui/gauge.js`, `ui/gaugeDraw.js`, `ui/chart.js` | shell | Cairo ring/bar (drawing kept free of St so it can be rendered to an image for checking) and stacked columns; colours from CSS, light-mode overrides in `stylesheet-light.css` |
 | `ui/indicator.js` | shell | The `PanelMenu.Button` and its pill |
 | `ui/popup.js` | shell | The dropdown, rebuilt on open, on new data and every 30 s while open |
 | `prefs/*.js` | prefs | Display, Data (bridge installer, direct mode warning), About |

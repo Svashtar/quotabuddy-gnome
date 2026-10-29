@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QuotaBuddy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-29 15:48+0100\n"
+"POT-Creation-Date: 2026-10-29 16:09+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,73 +17,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/ui/indicator.js:133
-msgid "Refresh Now"
-msgstr ""
-
-#: src/ui/indicator.js:134 src/prefs/displayPage.js:84
-msgid "Show What Is Left"
-msgstr ""
-
-#: src/ui/indicator.js:138
-msgid "Set Up Usage Limits…"
-msgstr ""
-
-#: src/ui/indicator.js:139
-msgid "Open Usage on claude.ai"
-msgstr ""
-
-#: src/ui/indicator.js:147 src/ui/popup.js:485 src/prefs/aboutPage.js:127
-msgid "Settings"
-msgstr ""
-
-#: src/ui/indicator.js:171
-msgid "QuotaBuddy: no usage limits yet"
-msgstr ""
-
-#: src/ui/indicator.js:227
-#, javascript-format
-msgid "%s: %d%% left"
-msgstr ""
-
-#: src/ui/indicator.js:227
-#, javascript-format
-msgid "%s: %d%% used"
-msgstr ""
-
-#: src/ui/indicator.js:234
-msgid "S"
-msgstr ""
-
-#: src/ui/indicator.js:234 src/ui/popup.js:49 src/prefs/displayPage.js:71
+#: src/ui/popup.js:49 src/ui/indicator.js:238 src/prefs/displayPage.js:71
 msgid "Session"
 msgstr ""
 
-#: src/ui/indicator.js:239
-msgid "W"
-msgstr ""
-
-#: src/ui/indicator.js:239 src/ui/popup.js:51 src/prefs/displayPage.js:72
+#: src/ui/popup.js:51 src/ui/indicator.js:243 src/prefs/displayPage.js:72
 msgid "Week"
-msgstr ""
-
-#: src/ui/indicator.js:243
-msgid "Model"
-msgstr ""
-
-#: src/ui/indicator.js:250
-#, javascript-format
-msgid "Session resets in %s"
-msgstr ""
-
-#: src/ui/indicator.js:254
-#, javascript-format
-msgid "%s tokens today"
-msgstr ""
-
-#: src/ui/indicator.js:258
-#, javascript-format
-msgid "%s at API prices today"
 msgstr ""
 
 #: src/ui/popup.js:53
@@ -225,60 +164,121 @@ msgstr ""
 msgid "Other"
 msgstr ""
 
-#: src/ui/popup.js:379
+#: src/ui/popup.js:381
 msgid "No replies in this range"
 msgstr ""
 
-#: src/ui/popup.js:386
+#: src/ui/popup.js:388
 msgid "24 h"
 msgstr ""
 
-#: src/ui/popup.js:386 src/ui/popup.js:405
+#: src/ui/popup.js:388 src/ui/popup.js:407
 msgid "7 days"
 msgstr ""
 
-#: src/ui/popup.js:400 src/prefs/displayPage.js:76
+#: src/ui/popup.js:402 src/prefs/displayPage.js:76
 msgid "At API prices"
 msgstr ""
 
-#: src/ui/popup.js:404
+#: src/ui/popup.js:406
 msgid "Today"
 msgstr ""
 
-#: src/ui/popup.js:406
+#: src/ui/popup.js:408
 msgid "This month"
 msgstr ""
 
-#: src/ui/popup.js:424
+#: src/ui/popup.js:426
 #, javascript-format
-msgid "This month’s use is worth %s× the %s price"
+msgid "This month’s use is worth %s× the %s price."
 msgstr ""
 
-#: src/ui/popup.js:426
+#: src/ui/popup.js:428
 msgid "An estimate for comparison; your plan is not billed per token."
 msgstr ""
 
-#: src/ui/popup.js:427
+#: src/ui/popup.js:429
 #, javascript-format
 msgid "Prices as of %s."
 msgstr ""
 
-#: src/ui/popup.js:435
+#: src/ui/popup.js:437
 msgid "Projects this week"
 msgstr ""
 
-#: src/ui/popup.js:446
+#: src/ui/popup.js:448
 #, javascript-format
 msgid "Busiest session today: %s · %s · %s · %s"
 msgstr ""
 
-#: src/ui/popup.js:455
+#: src/ui/popup.js:457
 #, javascript-format
 msgid "Cache: %d%% of prompts read from cache"
 msgstr ""
 
-#: src/ui/popup.js:484
+#: src/ui/popup.js:486
 msgid "Refresh"
+msgstr ""
+
+#: src/ui/popup.js:487 src/ui/indicator.js:151 src/prefs/aboutPage.js:127
+msgid "Settings"
+msgstr ""
+
+#: src/ui/indicator.js:137
+msgid "Refresh Now"
+msgstr ""
+
+#: src/ui/indicator.js:138 src/prefs/displayPage.js:84
+msgid "Show What Is Left"
+msgstr ""
+
+#: src/ui/indicator.js:142
+msgid "Set Up Usage Limits…"
+msgstr ""
+
+#: src/ui/indicator.js:143
+msgid "Open Usage on claude.ai"
+msgstr ""
+
+#: src/ui/indicator.js:175
+msgid "QuotaBuddy: no usage limits yet"
+msgstr ""
+
+#: src/ui/indicator.js:231
+#, javascript-format
+msgid "%s: %d%% left"
+msgstr ""
+
+#: src/ui/indicator.js:231
+#, javascript-format
+msgid "%s: %d%% used"
+msgstr ""
+
+#: src/ui/indicator.js:238
+msgid "S"
+msgstr ""
+
+#: src/ui/indicator.js:243
+msgid "W"
+msgstr ""
+
+#: src/ui/indicator.js:247
+msgid "Model"
+msgstr ""
+
+#: src/ui/indicator.js:254
+#, javascript-format
+msgid "Session resets in %s"
+msgstr ""
+
+#: src/ui/indicator.js:258
+#, javascript-format
+msgid "%s tokens today"
+msgstr ""
+
+#: src/ui/indicator.js:262
+#, javascript-format
+msgid "%s at API prices today"
 msgstr ""
 
 #: src/prefs/aboutPage.js:36

@@ -1,0 +1,12 @@
+/* SPDX-License-Identifier: GPL-2.0-or-later */
+/* SPDX-FileCopyrightText: 2026 Mitja Cebokli */
+/* Generated with AI for personal use. */
+/* Do NOT upload to extensions.gnome.org (EGO) unless you understand JavaScript */
+/* and can maintain this code. */
+
+/* GNOME Shell loads this instead of stylesheet.css in light mode, so it
+   imports that and only overrides what needs to differ. */
+@import url("stylesheet.css");
+
+/* The pace tick: white disappears on a light background. */
+.quotabuddy-gauge { -quotabuddy-marker: rgba(0, 0, 0, 0.8); }

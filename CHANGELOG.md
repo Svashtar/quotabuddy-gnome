@@ -20,5 +20,5 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - Without direct mode, the dropdown says when the figures are out of date and why.
 - The dropdown scrolls when it is taller than the screen.
 - A model's own weekly limit (such as Fable) shows in that model's colour in the top bar and the dropdown, so it is told apart from the session and week.
-- The Pace section explains the tick on the large rings.
+- The Pace section explains the tick on the large rings, which is now white (dark in light mode) so it doesn't look like part of the limit, and shows on both sides of the ring.
 - Both menus line up with the right edge of the top-bar button, so the open dropdown no longer shifts when the numbers change width.

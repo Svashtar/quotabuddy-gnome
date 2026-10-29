@@ -222,7 +222,7 @@ export class Popup {
             const card = vbox('quotabuddy-hero-card', {x_expand: true});
 
             const ringBox = new St.Widget({layout_manager: new Clutter.BinLayout(), x_align: Clutter.ActorAlign.CENTER});
-            const gauge = new Gauge({shape: 'ring', thickness: 0.11, style_class: `quotabuddy-hero-ring quotabuddy-${level}`});
+            const gauge = new Gauge({shape: 'ring', thickness: 0.085, markerRoom: true, style_class: `quotabuddy-hero-ring quotabuddy-${level}`});
             // The marker shows where an even pace would be, on the same scale as the ring.
             const marker = fc.expectedPct === null ? null : (showLeft ? 100 - fc.expectedPct : fc.expectedPct) / 100;
             gauge.setValue(pct / 100, marker);
@@ -372,7 +372,9 @@ export class Popup {
             const item = hbox('quotabuddy-legend-item');
             item.add_child(new St.Widget({style_class: 'quotabuddy-swatch', style: colorCss(f), y_align: Clutter.ActorAlign.CENTER}));
             const name = f === 'other' ? _('Other') : f[0].toUpperCase() + f.slice(1);
-            item.add_child(label(`${name} ${Math.round(families[f] / total * 100)}%`, 'quotabuddy-small'));
+            // A family that was used never reads as "0%".
+            const share = Math.round(families[f] / total * 100);
+            item.add_child(label(`${name} ${share < 1 ? '<1' : share}%`, 'quotabuddy-small'));
             legend.add_child(item);
         }
         if (!total)
@@ -421,7 +423,7 @@ export class Popup {
         let note;
         if (plan?.monthlyUsd && month > 0)
             /* Translators: "This month's use is worth 4.1× the Max 5× price" */
-            note = _('This month’s use is worth %s× the %s price').format((month / plan.monthlyUsd).toFixed(1), plan.label);
+            note = _('This month’s use is worth %s× the %s price.').format((month / plan.monthlyUsd).toFixed(1), plan.label);
         else
             note = _('An estimate for comparison; your plan is not billed per token.');
         const t = label(`${note} ${_('Prices as of %s.').format(PRICES_AS_OF)}`, 'quotabuddy-dim quotabuddy-small');

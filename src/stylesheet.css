@@ -18,7 +18,10 @@
 .quotabuddy-critical-text { color: #f38b8b; }
 .quotabuddy-idle-text { color: rgba(255, 255, 255, 0.55); }
 
-.quotabuddy-gauge { -quotabuddy-track: rgba(255, 255, 255, 0.16); }
+.quotabuddy-gauge {
+  -quotabuddy-track: rgba(255, 255, 255, 0.16);
+  -quotabuddy-marker: #ffffff;
+}
 
 /* ---- top bar ---- */
 #panel .quotabuddy-button {
@@ -106,12 +109,12 @@
 .quotabuddy-hero-card { spacing: 3px; }
 
 .quotabuddy-hero-ring {
-  width: 92px;
-  height: 92px;
+  width: 100px;
+  height: 100px;
 }
 
 .quotabuddy-hero-pct {
-  font-size: 1.55em;
+  font-size: 1.2em;
   font-weight: 800;
   font-feature-settings: "tnum";
 }
