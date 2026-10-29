@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QuotaBuddy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-29 15:37+0100\n"
+"POT-Creation-Date: 2026-10-29 15:43+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,7 +33,7 @@ msgstr ""
 msgid "Open Usage on claude.ai"
 msgstr ""
 
-#: src/ui/indicator.js:145 src/ui/popup.js:479 src/prefs/aboutPage.js:127
+#: src/ui/indicator.js:145 src/ui/popup.js:477 src/prefs/aboutPage.js:127
 msgid "Settings"
 msgstr ""
 
@@ -148,132 +148,132 @@ msgstr ""
 msgid "used"
 msgstr ""
 
-#: src/ui/popup.js:239
+#: src/ui/popup.js:240
 msgid "Reset, waiting for a reading"
 msgstr ""
 
-#: src/ui/popup.js:242
+#: src/ui/popup.js:243
 #, javascript-format
-msgid "Resets in %s · %s"
+msgid "Resets in %s"
 msgstr ""
 
-#: src/ui/popup.js:244
+#: src/ui/popup.js:246
 msgid "Reset time unknown"
 msgstr ""
 
-#: src/ui/popup.js:261
+#: src/ui/popup.js:259
 #, javascript-format
 msgid "resets %s"
 msgstr ""
 
-#: src/ui/popup.js:264
+#: src/ui/popup.js:262
 msgid "Extra usage"
 msgstr ""
 
-#: src/ui/popup.js:287 src/prefs/displayPage.js:96
+#: src/ui/popup.js:285 src/prefs/displayPage.js:96
 msgid "Pace"
 msgstr ""
 
-#: src/ui/popup.js:297
+#: src/ui/popup.js:295
 msgid "Limit reached"
 msgstr ""
 
-#: src/ui/popup.js:299
+#: src/ui/popup.js:297
 #, javascript-format
 msgid "At this pace the limit is reached in %s, %s before it resets"
 msgstr ""
 
-#: src/ui/popup.js:305
+#: src/ui/popup.js:303
 #, javascript-format
 msgid "Faster than an even pace: %d%% used, %d%% of the time gone"
 msgstr ""
 
-#: src/ui/popup.js:309
+#: src/ui/popup.js:307
 #, javascript-format
 msgid "On track to end near %d%%"
 msgstr ""
 
-#: src/ui/popup.js:312
+#: src/ui/popup.js:310
 msgid "No use lately"
 msgstr ""
 
-#: src/ui/popup.js:315
+#: src/ui/popup.js:313
 msgid "Not enough readings yet"
 msgstr ""
 
-#: src/ui/popup.js:330 src/prefs/displayPage.js:97
+#: src/ui/popup.js:328 src/prefs/displayPage.js:97
 msgid "Activity"
 msgstr ""
 
-#: src/ui/popup.js:355
+#: src/ui/popup.js:353
 msgid "24 h ago"
 msgstr ""
 
-#: src/ui/popup.js:357
+#: src/ui/popup.js:355
 msgid "12 h"
 msgstr ""
 
-#: src/ui/popup.js:359
+#: src/ui/popup.js:357
 msgid "now"
 msgstr ""
 
-#: src/ui/popup.js:368
+#: src/ui/popup.js:366
 msgid "Other"
 msgstr ""
 
-#: src/ui/popup.js:373
+#: src/ui/popup.js:371
 msgid "No replies in this range"
 msgstr ""
 
-#: src/ui/popup.js:380
+#: src/ui/popup.js:378
 msgid "24 h"
 msgstr ""
 
-#: src/ui/popup.js:380 src/ui/popup.js:399
+#: src/ui/popup.js:378 src/ui/popup.js:397
 msgid "7 days"
 msgstr ""
 
-#: src/ui/popup.js:394 src/prefs/displayPage.js:76
+#: src/ui/popup.js:392 src/prefs/displayPage.js:76
 msgid "At API prices"
 msgstr ""
 
-#: src/ui/popup.js:398
+#: src/ui/popup.js:396
 msgid "Today"
 msgstr ""
 
-#: src/ui/popup.js:400
+#: src/ui/popup.js:398
 msgid "This month"
 msgstr ""
 
-#: src/ui/popup.js:418
+#: src/ui/popup.js:416
 #, javascript-format
 msgid "This month’s use is worth %s× the %s price"
 msgstr ""
 
-#: src/ui/popup.js:420
+#: src/ui/popup.js:418
 msgid "An estimate for comparison; your plan is not billed per token."
 msgstr ""
 
-#: src/ui/popup.js:421
+#: src/ui/popup.js:419
 #, javascript-format
 msgid "Prices as of %s."
 msgstr ""
 
-#: src/ui/popup.js:429
+#: src/ui/popup.js:427
 msgid "Projects this week"
 msgstr ""
 
-#: src/ui/popup.js:440
+#: src/ui/popup.js:438
 #, javascript-format
 msgid "Busiest session today: %s · %s · %s · %s"
 msgstr ""
 
-#: src/ui/popup.js:449
+#: src/ui/popup.js:447
 #, javascript-format
 msgid "Cache: %d%% of prompts read from cache"
 msgstr ""
 
-#: src/ui/popup.js:478
+#: src/ui/popup.js:476
 msgid "Refresh"
 msgstr ""
 

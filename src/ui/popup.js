@@ -234,19 +234,17 @@ export class Popup {
             card.add_child(ringBox);
 
             card.add_child(label(windowName(w), 'quotabuddy-hero-name', {x_align: Clutter.ActorAlign.CENTER}));
-            let reset;
-            if (w.expired)
-                reset = _('Reset, waiting for a reading');
-            else if (w.resetsAt)
-                /* Translators: "Resets in 2h 14m · 15:00" */
-                reset = _('Resets in %s · %s').format(formatDuration(w.resetsAt - now), formatClock(w.resetsAt, now));
-            else
-                reset = _('Reset time unknown');
-            // Half the dropdown is too narrow for "Resets in 10h 33m · 02:00 AM".
-            const resetLabel = label(reset, 'quotabuddy-dim quotabuddy-small', {x_align: Clutter.ActorAlign.CENTER});
-            wrap(resetLabel);
-            resetLabel.clutter_text.line_alignment = Pango.Alignment.CENTER;
-            card.add_child(resetLabel);
+            // Two lines: half the dropdown is too narrow for both on one.
+            const small = text => card.add_child(label(text, 'quotabuddy-dim quotabuddy-small', {x_align: Clutter.ActorAlign.CENTER}));
+            if (w.expired) {
+                small(_('Reset, waiting for a reading'));
+            } else if (w.resetsAt) {
+                /* Translators: "Resets in 2h 14m"; the clock time follows on the next line */
+                small(_('Resets in %s').format(formatDuration(w.resetsAt - now)));
+                small(formatClock(w.resetsAt, now));
+            } else {
+                small(_('Reset time unknown'));
+            }
             box.add_child(card);
         }
         return box;
