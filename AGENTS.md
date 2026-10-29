@@ -53,6 +53,8 @@ journalctl -b _COMM=gnome-shell -o cat --since -10min                           
   **No negative margins**: St overflows the height to 2^32 and the whole menu silently fails to
   draw (the button still turns active).
   **No `letter-spacing`**: St measures labels without it, so the text gets cut off with "…".
+  **Never set an actor's `min_width` above its natural width** without also setting
+  `natural_width`: Clutter aborts the whole shell.
 - Shell UI can be checked without a re-login in a throwaway headless shell:
   `dbus-run-session -- gnome-shell --headless --virtual-monitor 1280x800 --wayland-display=<short>`
   with scratch `XDG_DATA_HOME` (extension symlinked in), `XDG_CONFIG_HOME`

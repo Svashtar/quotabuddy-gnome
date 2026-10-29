@@ -78,9 +78,15 @@ class QuotaBuddyIndicator extends PanelMenu.Button {
         });
         this.add_action(keys);
 
+        // Widest label width per figure; see update().
+        this._widths = new Map();
+        const restyle = () => {
+            this._widths.clear();
+            this.update();
+        };
         settings.connectObject(
-            'changed::panel-figures', () => this.update(),
-            'changed::panel-style', () => this.update(),
+            'changed::panel-figures', restyle,
+            'changed::panel-style', restyle,
             'changed::show-left', () => this.update(),
             'changed::pill-style', () => this.update(),
             this);
@@ -173,7 +179,12 @@ class QuotaBuddyIndicator extends PanelMenu.Button {
                 this._popup.update();
             return;
         }
-        const items = this._settings.get_strv('panel-figures').map(f => this._item(f, windows, showLeft)).filter(Boolean);
+        const items = this._settings.get_strv('panel-figures')
+            .map(f => {
+                const item = this._item(f, windows, showLeft);
+                return item && {...item, key: f};
+            })
+            .filter(Boolean);
         if (!items.length)
             items.push({label: '–', fraction: 0, level: 'idle', gauge: true, short: 'Q'});
 
@@ -196,15 +207,29 @@ class QuotaBuddyIndicator extends PanelMenu.Button {
                 gauge.setValue(item.fraction);
                 box.add_child(gauge);
             }
+            let text = null;
+            const prefix = style === 'text' && item.short ? `${item.short} ` : '';
             if (style !== 'rings' || !item.gauge) {
-                const text = style === 'text' && item.short ? `${item.short} ${item.label}` : item.label;
-                box.add_child(new St.Label({
-                    text,
+                text = new St.Label({
+                    text: `${prefix}${item.widest ?? item.label}`,
                     style_class: `quotabuddy-figure-label quotabuddy-${item.level}-text`,
                     y_align: Clutter.ActorAlign.CENTER,
-                }));
+                });
+                box.add_child(text);
             }
             this._pill.add_child(box);
+            if (text) {
+                // Each figure keeps the widest width it has had (percentages
+                // start at "100%"), so the button doesn't change width as the
+                // numbers tick and the open dropdown, centred on it, stays put.
+                const [, natural] = text.get_preferred_width(-1);
+                const width = Math.max(this._widths.get(item.key) ?? 0, natural);
+                this._widths.set(item.key, width);
+                // Both: Clutter aborts the shell if the minimum exceeds the natural width.
+                text.min_width = width;
+                text.natural_width = width;
+                text.text = `${prefix}${item.label}`;
+            }
             accessible.push(item.accessible ?? item.label);
         }
         this.accessible_name = `QuotaBuddy: ${accessible.join(', ')}`;
@@ -219,6 +244,7 @@ class QuotaBuddyIndicator extends PanelMenu.Button {
             const pct = shownPct(w.usedPct, showLeft);
             return {
                 label: `${pct}%`,
+                widest: '100%',
                 fraction: pct / 100,
                 level: w.expired ? 'idle' : levelFor(w, this._provider.forecast(w)),
                 gauge: true,
