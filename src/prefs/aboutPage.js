@@ -22,8 +22,10 @@ Gio._promisify(Gtk.FileDialog.prototype, 'open', 'open_finish');
 Gio._promisify(Gio.File.prototype, 'replace_contents_async', 'replace_contents_finish');
 Gio._promisify(Gio.File.prototype, 'load_contents_async', 'load_contents_finish');
 
-function linkRow(title, subtitle, uri) {
+function linkRow(title, subtitle, uri, iconName = null) {
     const row = new Adw.ActionRow({title, subtitle, activatable: true});
+    if (iconName)
+        row.add_prefix(new Gtk.Image({icon_name: iconName}));
     row.add_suffix(new Gtk.Image({icon_name: 'adw-external-link-symbolic'}));
     row.connect('activated', () => {
         new Gtk.UriLauncher({uri}).launch(row.get_root(), null, null);
@@ -143,6 +145,10 @@ class QuotaBuddyAboutPage extends Adw.PreferencesPage {
                           'https://www.gnu.org/licenses/old-licenses/gpl-2.0.html'));
         legal.add(linkRow(_('Not affiliated with Anthropic'), _('Claude is a trademark of Anthropic'), 'https://www.anthropic.com'));
         this.add(legal);
+
+        const maker = new Adw.PreferencesGroup();
+        maker.add(linkRow(_('Made by Svashta'), 'svashta.com', 'https://svashta.com', 'svashta-symbolic'));
+        this.add(maker);
     }
 
     _toast(title) {

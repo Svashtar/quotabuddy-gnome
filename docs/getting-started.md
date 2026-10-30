@@ -1,3 +1,5 @@
+<img src="../src/icons/quotabuddy.svg" alt="" width="48" align="right">
+
 # Getting started
 
 ## 1. Choose where your limits come from

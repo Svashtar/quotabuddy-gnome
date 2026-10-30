@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QuotaBuddy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-29 16:25+0100\n"
+"POT-Creation-Date: 2026-10-30 05:59+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -220,7 +220,7 @@ msgstr ""
 msgid "Refresh"
 msgstr ""
 
-#: src/ui/popup.js:488 src/ui/indicator.js:152 src/prefs/aboutPage.js:127
+#: src/ui/popup.js:488 src/ui/indicator.js:152 src/prefs/aboutPage.js:129
 msgid "Settings"
 msgstr ""
 
@@ -281,167 +281,171 @@ msgstr ""
 msgid "%s at API prices today"
 msgstr ""
 
-#: src/prefs/aboutPage.js:36
+#: src/prefs/aboutPage.js:38
 msgid "The file is not valid JSON."
 msgstr ""
 
-#: src/prefs/aboutPage.js:37
+#: src/prefs/aboutPage.js:39
 msgid "The file is not a QuotaBuddy settings backup."
 msgstr ""
 
-#: src/prefs/aboutPage.js:38
+#: src/prefs/aboutPage.js:40
 msgid "The backup was made by a newer version of QuotaBuddy."
 msgstr ""
 
-#: src/prefs/aboutPage.js:39
+#: src/prefs/aboutPage.js:41
 #, javascript-format
 msgid "The backup has an invalid “%s” value."
 msgstr ""
 
-#: src/prefs/aboutPage.js:69
+#: src/prefs/aboutPage.js:71
 msgid "About"
 msgstr ""
 
-#: src/prefs/aboutPage.js:81
+#: src/prefs/aboutPage.js:83
 msgid "QuotaBuddy"
 msgstr ""
 
-#: src/prefs/aboutPage.js:83
+#: src/prefs/aboutPage.js:85
 msgid "Your Claude usage limits at a glance"
 msgstr ""
 
-#: src/prefs/aboutPage.js:92
+#: src/prefs/aboutPage.js:94
 msgid "Version"
 msgstr ""
 
-#: src/prefs/aboutPage.js:94
+#: src/prefs/aboutPage.js:96
 msgid "Git commit"
 msgstr ""
 
-#: src/prefs/aboutPage.js:96 src/prefs/aboutPage.js:219
+#: src/prefs/aboutPage.js:98 src/prefs/aboutPage.js:225
 msgid "What’s New"
 msgstr ""
 
-#: src/prefs/aboutPage.js:102
+#: src/prefs/aboutPage.js:104
 msgid "Help"
 msgstr ""
 
-#: src/prefs/aboutPage.js:103
+#: src/prefs/aboutPage.js:105
 msgid "Website"
 msgstr ""
 
-#: src/prefs/aboutPage.js:103
+#: src/prefs/aboutPage.js:105
 msgid "Features, screenshots and installation"
 msgstr ""
 
-#: src/prefs/aboutPage.js:104
+#: src/prefs/aboutPage.js:106
 msgid "Documentation"
 msgstr ""
 
-#: src/prefs/aboutPage.js:104
+#: src/prefs/aboutPage.js:106
 msgid "Setup, data sources and troubleshooting"
 msgstr ""
 
-#: src/prefs/aboutPage.js:105
+#: src/prefs/aboutPage.js:107
 msgid "Report an Issue"
 msgstr ""
 
-#: src/prefs/aboutPage.js:105
+#: src/prefs/aboutPage.js:107
 msgid "Include the debug info below"
 msgstr ""
 
-#: src/prefs/aboutPage.js:108
+#: src/prefs/aboutPage.js:110
 msgid "Copy Debug Info"
 msgstr ""
 
-#: src/prefs/aboutPage.js:109
+#: src/prefs/aboutPage.js:111
 msgid ""
 "Versions, settings and which sources have data. Never tokens, projects or "
 "usage figures."
 msgstr ""
 
-#: src/prefs/aboutPage.js:117
+#: src/prefs/aboutPage.js:119
 msgid "Debug info copied"
 msgstr ""
 
-#: src/prefs/aboutPage.js:120
+#: src/prefs/aboutPage.js:122
 msgid "Could not collect debug info"
 msgstr ""
 
-#: src/prefs/aboutPage.js:128
+#: src/prefs/aboutPage.js:130
 msgid ""
 "Backups include the top bar, dropdown and plan settings. Direct mode is not "
 "included."
 msgstr ""
 
-#: src/prefs/aboutPage.js:130
+#: src/prefs/aboutPage.js:132
 msgid "Export Settings…"
 msgstr ""
 
-#: src/prefs/aboutPage.js:132
+#: src/prefs/aboutPage.js:134
 msgid "Import Settings…"
 msgstr ""
 
-#: src/prefs/aboutPage.js:134
+#: src/prefs/aboutPage.js:136
 msgid "Reset All Settings…"
 msgstr ""
 
-#: src/prefs/aboutPage.js:142
+#: src/prefs/aboutPage.js:144
 msgid "License"
 msgstr ""
 
-#: src/prefs/aboutPage.js:142
+#: src/prefs/aboutPage.js:144
 msgid "GNU General Public License, version 2 or later"
 msgstr ""
 
-#: src/prefs/aboutPage.js:144
+#: src/prefs/aboutPage.js:146
 msgid "Not affiliated with Anthropic"
 msgstr ""
 
-#: src/prefs/aboutPage.js:144
+#: src/prefs/aboutPage.js:146
 msgid "Claude is a trademark of Anthropic"
 msgstr ""
 
-#: src/prefs/aboutPage.js:181
+#: src/prefs/aboutPage.js:150
+msgid "Made by Svashta"
+msgstr ""
+
+#: src/prefs/aboutPage.js:187
 msgid "Release notes are not available."
 msgstr ""
 
-#: src/prefs/aboutPage.js:185
+#: src/prefs/aboutPage.js:191
 msgid "Not released yet"
 msgstr ""
 
-#: src/prefs/aboutPage.js:235
+#: src/prefs/aboutPage.js:241
 msgid "Settings exported"
 msgstr ""
 
-#: src/prefs/aboutPage.js:239
+#: src/prefs/aboutPage.js:245
 msgid "JSON files"
 msgstr ""
 
-#: src/prefs/aboutPage.js:254
+#: src/prefs/aboutPage.js:260
 msgid "Settings imported"
 msgstr ""
 
-#: src/prefs/aboutPage.js:259
+#: src/prefs/aboutPage.js:265
 msgid "Reset All Settings?"
 msgstr ""
 
-#: src/prefs/aboutPage.js:260
+#: src/prefs/aboutPage.js:266
 msgid ""
 "All settings go back to their defaults and direct mode turns off. Your usage "
 "history is kept."
 msgstr ""
 
-#: src/prefs/aboutPage.js:262 src/prefs/dataPage.js:198
+#: src/prefs/aboutPage.js:268 src/prefs/dataPage.js:198
 #: src/prefs/dataPage.js:240
 msgid "Cancel"
 msgstr ""
 
-#: src/prefs/aboutPage.js:263
+#: src/prefs/aboutPage.js:269
 msgid "Reset"
 msgstr ""
 
-#: src/prefs/aboutPage.js:270
+#: src/prefs/aboutPage.js:276
 msgid "Settings reset"
 msgstr ""
 

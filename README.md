@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="src/icons/quotabuddy.svg" alt="QuotaBuddy logo" width="96">
+</p>
+
 # QuotaBuddy
 
 **Your Claude usage limits in the GNOME top bar: the 5-hour session and the weekly limit as small rings, with the full picture one click away.**
@@ -133,3 +137,15 @@ QuotaBuddy is in English only. Every string is ready for gettext ([`po/quotabudd
 ## License
 
 QuotaBuddy is free software, released under the [GNU General Public License, version 2 or later](LICENSE) (GPL-2.0-or-later). It is not affiliated with Anthropic; Claude is a trademark of Anthropic.
+
+---
+
+<p align="center">
+  <a href="https://svashta.com">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="docs/assets/svashta-wordmark-light.svg">
+      <img src="docs/assets/svashta-wordmark-dark.svg" alt="Svashta" height="24">
+    </picture>
+  </a>
+  <br><sub>Made by <a href="https://svashta.com">Svashta</a></sub>
+</p>
